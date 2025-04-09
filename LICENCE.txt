@@ -1,0 +1,16 @@
+Copyright (c) 2025 Alencar Consultorias
+
+Todos os direitos reservados.
+
+Este software é fornecido pela Alencar Consultorias e é de uso exclusivamente interno, privado e restrito. Nenhuma parte deste código pode ser copiada, modificada, distribuída ou utilizada, no todo ou em parte, sem permissão expressa por escrito da Alencar Consultorias.
+
+Este projeto encontra-se em desenvolvimento e não está licenciado para uso comercial externo, revenda, sublicenciamento ou hospedagem por terceiros.
+
+Ao acessar este repositório, você concorda com os seguintes termos:
+- É proibido qualquer uso comercial ou redistribuição sem autorização.
+- O código-fonte permanece sob posse exclusiva da Alencar Consultorias.
+- A violação destes termos poderá resultar em penalidades legais conforme a legislação aplicável.
+
+Futuramente, a Alencar Consultorias poderá liberar este software sob outra licença, comercial ou de código aberto, conforme evolução do produto e decisão da equipe responsável.
+
+Para informações sobre licenciamento comercial ou parceria, entre em contato: contato@alencarconsultorias.com.br
