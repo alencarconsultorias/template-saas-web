@@ -3,39 +3,41 @@
 Este projeto fornece uma base reutilizável para o desenvolvimento de aplicações SaaS e Mobile, com funcionalidades essenciais como autenticação de usuários, navegação por guias, abas, perfil do usuário, busca e muito mais.
 
 ## 💡 Funcionalidades
-- Autenticação JWT
-- Interface responsiva
-- Navegação por abas e menus
-- Componentes reutilizáveis
+- Autenticação de usuarios; 
+- Interface responsiva; 
+- Navegação por abas e menus; 
+- Tema Dark; 
+- Componentes reutilizaveis. 
 
-## ⚙️ Tecnologias Utilizadas
-- Front-end: React Native + Expo
-- Back-end: Node.js + Express
-- Banco de Dados: PostgreSQL
+## ⚙️ Tecnologias Utilizadas (Stack)
+| Camadas | Tecnologias Escolhidas|
+|:---:|:---:|
+| Banco de Dados | PostgreSQL |
+| Nuvem | AWS |
+| Autenticação | Firebase Auth |  
+| Front-End | React + TypeScript |
+| Back-End | React/Node.js + TypeScript |
 
 ## ⚡ Instalação
 ```bash
 # Clone o repositório
-git clone https://github.com/sua-org/nome-do-projeto.git
+git clone git@github.com:alencarconsultorias/template-saas.git 
+Obs.: importante a chave SSH estar cadastrada no Github 
 
 # Instale dependências do back-end
-cd backend
-npm install
+*em breve*
 
 # Instale dependências do front-end
-cd ../mobile
-npm install
+*em breve*
 ```
 
 ## 🌐 Executando o Projeto
 ```bash
 # Back-end
-cd backend
-npm run dev
+*em breve*
 
 # Front-end (em outro terminal)
-cd mobile
-npm start
+*em breve*
 ```
 
 ## 🚩 Contribuindo
