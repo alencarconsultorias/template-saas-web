@@ -1,0 +1,31 @@
+name: Simulate Deploy Frontend to S3/CloudFront
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  simulate-deploy-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies (simulado)
+        run: echo "Skipping npm install (simulation)"
+
+      - name: Build front-end (simulado)
+        run: echo "Skipping build step (simulation)"
+
+      - name: Upload to S3 (simulado)
+        run: echo "Simulating upload to S3 bucket 🚀"
+
+      - name: Invalidate CloudFront Cache (simulado)
+        run: echo "Simulating CloudFront cache invalidation 🌀"
