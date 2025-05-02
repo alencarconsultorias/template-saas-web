@@ -3,7 +3,7 @@ name: Simulate Deploy to Staging
 on:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   simulate-deploy:
