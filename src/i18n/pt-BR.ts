@@ -153,4 +153,34 @@ export const ptBR = {
       twoFactorHint: "Adicione uma camada extra de segurança à sua conta",
     },
   },
+  app: {
+    name: "SaaS Platform",
+  },
+  search: {
+    placeholder: "Pesquisar...",
+  },
+  header: {
+    faq: "FAQ",
+    profile: "Perfil",
+    settings: "Configurações",
+    myProfile: "Meu Perfil",
+    logout: "Sair",
+  },
+  profile: {
+    title: "Editar Perfil",
+    photo: {
+      title: "Foto de Perfil",
+      alt: "Foto de perfil",
+      noPhoto: "Sem foto",
+      choose: "Escolher Foto",
+    },
+    personalInfo: {
+      title: "Informações Pessoais",
+      name: "Nome Completo",
+      birthDate: "Data de Nascimento",
+      email: "Email",
+      bio: "Biografia",
+    },
+    save: "Salvar Alterações",
+  },
 }; 

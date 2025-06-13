@@ -153,4 +153,34 @@ export const en = {
       twoFactorHint: "Add an extra layer of security to your account",
     },
   },
+  app: {
+    name: "SaaS Platform",
+  },
+  search: {
+    placeholder: "Search...",
+  },
+  header: {
+    faq: "FAQ",
+    profile: "Profile",
+    settings: "Settings",
+    myProfile: "My Profile",
+    logout: "Logout",
+  },
+  profile: {
+    title: "Edit Profile",
+    photo: {
+      title: "Profile Photo",
+      alt: "Profile photo",
+      noPhoto: "No photo",
+      choose: "Choose Photo",
+    },
+    personalInfo: {
+      title: "Personal Information",
+      name: "Full Name",
+      birthDate: "Birth Date",
+      email: "Email",
+      bio: "Biography",
+    },
+    save: "Save Changes",
+  },
 }; 
