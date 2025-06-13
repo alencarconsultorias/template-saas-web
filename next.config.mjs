@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  output: 'export',
   webpack(config) {
     // Importa a configuração padrão de regra de módulo de arquivos
     const fileLoaderRule = config.module.rules.find((rule) =>

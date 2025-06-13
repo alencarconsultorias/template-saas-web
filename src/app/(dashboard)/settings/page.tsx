@@ -11,7 +11,7 @@ interface NotificationSetting {
 }
 
 export default function SettingsPage() {
-  const { t, setLanguage, currentLanguage } = useLanguage();
+  const { t, setLanguage, language } = useLanguage();
   const [notifications, setNotifications] = useState<NotificationSetting[]>([
     {
       id: "email-updates",
@@ -55,7 +55,7 @@ export default function SettingsPage() {
             <button
               onClick={() => setLanguage("en")}
               className={`px-4 py-2 rounded-lg transition-colors ${
-                currentLanguage === "en"
+                language === "en"
                   ? "bg-gold-600 text-white"
                   : "bg-gray-900 text-gray-300 hover:bg-gold-500/5"
               }`}
@@ -65,7 +65,7 @@ export default function SettingsPage() {
             <button
               onClick={() => setLanguage("pt-BR")}
               className={`px-4 py-2 rounded-lg transition-colors ${
-                currentLanguage === "pt-BR"
+                language === "pt-BR"
                   ? "bg-gold-600 text-white"
                   : "bg-gray-900 text-gray-300 hover:bg-gold-500/5"
               }`}
