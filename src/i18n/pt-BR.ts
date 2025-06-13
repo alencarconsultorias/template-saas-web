@@ -128,29 +128,31 @@ export const ptBR = {
   },
   settings: {
     title: "Configurações",
-    language: "Idioma",
-    theme: "Tema",
-    notifications: "Notificações",
-    security: "Segurança",
-    profile: "Perfil",
-    languages: {
+    language: {
+      title: "Idioma",
       en: "Inglês",
       ptBR: "Português (Brasil)",
     },
-    themes: {
+    theme: {
+      title: "Tema",
       light: "Claro",
       dark: "Escuro",
     },
     notifications: {
+      title: "Notificações",
       email: "Notificações por E-mail",
       push: "Notificações Push",
       updates: "Atualizações do Sistema",
     },
     security: {
+      title: "Segurança",
       changePassword: "Alterar Senha",
       twoFactor: "Autenticação em Dois Fatores",
       passwordHint: "Atualize sua senha regularmente para manter sua conta segura",
       twoFactorHint: "Adicione uma camada extra de segurança à sua conta",
+    },
+    profile: {
+      title: "Perfil",
     },
   },
   app: {

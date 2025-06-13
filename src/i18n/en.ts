@@ -128,29 +128,31 @@ export const en = {
   },
   settings: {
     title: "Settings",
-    language: "Language",
-    theme: "Theme",
-    notifications: "Notifications",
-    security: "Security",
-    profile: "Profile",
-    languages: {
+    language: {
+      title: "Language",
       en: "English",
       ptBR: "Portuguese (Brazil)",
     },
-    themes: {
+    theme: {
+      title: "Theme",
       light: "Light",
       dark: "Dark",
     },
     notifications: {
+      title: "Notifications",
       email: "Email Notifications",
       push: "Push Notifications",
       updates: "System Updates",
     },
     security: {
+      title: "Security",
       changePassword: "Change Password",
       twoFactor: "Two-Factor Authentication",
       passwordHint: "Update your password regularly to keep your account secure",
       twoFactorHint: "Add an extra layer of security to your account",
+    },
+    profile: {
+      title: "Profile",
     },
   },
   app: {
