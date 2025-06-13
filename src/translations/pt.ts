@@ -75,4 +75,38 @@ export const pt = {
       failed: "Falhou",
     },
   },
+  auth: {
+    login: {
+      title: "Bem-vindo de volta",
+      subtitle: "Entre na sua conta para continuar",
+      email: "Endereço de email",
+      password: "Senha",
+      submit: "Entrar",
+      loading: "Entrando...",
+      registerLink: "Criar uma conta",
+      noAccount: "Não tem uma conta?",
+      rememberMe: "Lembrar-me",
+      forgotPassword: "Esqueceu sua senha?",
+    },
+    register: {
+      title: "Criar Conta",
+      subtitle: "Junte-se a nós hoje",
+      email: "Endereço de email",
+      password: "Senha",
+      confirmPassword: "Confirmar senha",
+      submit: "Criar conta",
+      loading: "Criando conta...",
+      loginLink: "Já tem uma conta? Entre",
+      errors: {
+        passwordMismatch: "As senhas não coincidem",
+        emailInUse: "Este email já está em uso",
+        weakPassword: "A senha é muito fraca",
+        generic: "Ocorreu um erro. Tente novamente.",
+      },
+    },
+    errors: {
+      invalidCredentials: "Email ou senha inválidos",
+      generic: "Ocorreu um erro. Tente novamente.",
+    },
+  },
 }; 
