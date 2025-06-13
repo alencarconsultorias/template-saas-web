@@ -3,12 +3,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Header() {
   const [search, setSearch] = useState("");
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const router = useRouter();
   const { t } = useLanguage();
+  const { logout } = useAuth();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,11 +18,13 @@ export default function Header() {
     // Exemplo: router.push(`/search?q=${search}`)
   };
 
-  const handleLogout = () => {
-    // Aqui você implementaria a lógica de logout
-    // Por exemplo, limpar o token de autenticação, cookies, etc.
-    console.log("Logout realizado");
-    router.push("/login"); // Redireciona para a página de login
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setShowProfileMenu(false);
+    } catch (error) {
+      console.error("Erro ao fazer logout:", error);
+    }
   };
 
   return (

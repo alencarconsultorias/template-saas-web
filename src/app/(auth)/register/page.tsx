@@ -1,125 +1,135 @@
 "use client";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function RegisterPage() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const { t } = useLanguage();
+  const { signUp } = useAuth();
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Aqui você adicionaria a lógica de registro
-  };
+    setError("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    if (password !== confirmPassword) {
+      setError(t("auth.register.errors.passwordMismatch"));
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await signUp(email, password);
+      router.push("/dashboard");
+    } catch (error: any) {
+      if (error.code === "auth/email-already-in-use") {
+        setError(t("auth.register.errors.emailInUse"));
+      } else if (error.code === "auth/weak-password") {
+        setError(t("auth.register.errors.weakPassword"));
+      } else {
+        setError(t("auth.register.errors.generic"));
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="w-full max-w-md space-y-8 bg-secondary p-8 rounded-xl shadow-xl">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold text-primary">Create Account</h2>
-        <p className="mt-2 text-gray-400">Join us today</p>
-      </div>
-
-      <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-        <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="firstName" className="text-sm font-medium text-gray-300">
-                First Name
-              </label>
-              <input
-                name="firstName"
-                type="text"
-                required
-                value={formData.firstName}
-                onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 bg-secondary-light border border-gray-600 rounded-md text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-            </div>
-            <div>
-              <label htmlFor="lastName" className="text-sm font-medium text-gray-300">
-                Last Name
-              </label>
-              <input
-                name="lastName"
-                type="text"
-                required
-                value={formData.lastName}
-                onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 bg-secondary-light border border-gray-600 rounded-md text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="email" className="text-sm font-medium text-gray-300">
-              Email
-            </label>
-            <input
-              name="email"
-              type="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 bg-secondary-light border border-gray-600 rounded-md text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="password" className="text-sm font-medium text-gray-300">
-              Password
-            </label>
-            <input
-              name="password"
-              type="password"
-              required
-              value={formData.password}
-              onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 bg-secondary-light border border-gray-600 rounded-md text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="confirmPassword" className="text-sm font-medium text-gray-300">
-              Confirm Password
-            </label>
-            <input
-              name="confirmPassword"
-              type="password"
-              required
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 bg-secondary-light border border-gray-600 rounded-md text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
-          </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
+            {t("auth.register.title")}
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-400">
+            {t("auth.register.subtitle")}
+          </p>
         </div>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+              <label htmlFor="email-address" className="sr-only">
+                {t("auth.register.email")}
+              </label>
+              <input
+                id="email-address"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 bg-gray-800 text-gray-100 placeholder-gray-400 rounded-t-md focus:outline-none focus:ring-gold-500 focus:border-gold-500 focus:z-10 sm:text-sm"
+                placeholder={t("auth.register.email")}
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="sr-only">
+                {t("auth.register.password")}
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="new-password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 bg-gray-800 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-gold-500 focus:border-gold-500 focus:z-10 sm:text-sm"
+                placeholder={t("auth.register.password")}
+              />
+            </div>
+            <div>
+              <label htmlFor="confirm-password" className="sr-only">
+                {t("auth.register.confirmPassword")}
+              </label>
+              <input
+                id="confirm-password"
+                name="confirm-password"
+                type="password"
+                autoComplete="new-password"
+                required
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 bg-gray-800 text-gray-100 placeholder-gray-400 rounded-b-md focus:outline-none focus:ring-gold-500 focus:border-gold-500 focus:z-10 sm:text-sm"
+                placeholder={t("auth.register.confirmPassword")}
+              />
+            </div>
+          </div>
 
-        <button
-          type="submit"
-          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-secondary bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
-        >
-          Create Account
-        </button>
+          {error && (
+            <div className="text-red-500 text-sm text-center">{error}</div>
+          )}
 
-        <p className="text-center text-sm text-gray-400">
-          Already have an account?{" "}
-          <Link href="/login" className="text-primary hover:text-primary-light transition-colors">
-            Sign in
-          </Link>
-        </p>
-      </form>
+          <div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gold-600 hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? t("auth.register.loading") : t("auth.register.submit")}
+            </button>
+          </div>
+
+          <div className="text-sm text-center">
+            <Link
+              href="/login"
+              className="font-medium text-gold-600 hover:text-gold-500"
+            >
+              {t("auth.register.loginLink")}
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 } 
