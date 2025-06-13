@@ -15,7 +15,19 @@ const nextConfig = {
     // Adiciona o svgr/webpack para lidar com SVGs como componentes React
     config.module.rules.push({
       test: /\.svg$/,
-      use: ["@svgr/webpack"],
+      use: [
+        {
+          loader: "@svgr/webpack",
+          options: {
+            svgoConfig: {
+              plugins: [{
+                name: "removeDimensions",
+                active: true
+              }],
+            },
+          },
+        },
+      ],
     });
 
     return config;

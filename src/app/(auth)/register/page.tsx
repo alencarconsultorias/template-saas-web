@@ -50,7 +50,7 @@ export default function RegisterPage() {
         <div className="bg-black rounded-2xl shadow-xl p-8 border border-gray-800">
           {/* Logo */}
           <div className="flex justify-center mb-8">
-            <LogoLogin className="w-auto h-16" />
+            <LogoLogin className="w-64 h-20" />
           </div>
 
           <h2 className="text-2xl font-bold text-center text-gray-100 mb-2">
