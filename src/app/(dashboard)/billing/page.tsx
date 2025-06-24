@@ -143,27 +143,24 @@ export default function BillingPage() {
 
       {/* Histórico de Faturas */}
       <div>
-        <h2 className="text-xl font-bold text-gray-100 mb-4">{t("billing.invoiceHistory")}</h2>
-        <div className="bg-black rounded-lg shadow-md overflow-hidden">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">{t("billing.invoiceHistory")}</h2>
+        <div className="bg-white dark:bg-black rounded-lg shadow-md border border-gray-200 dark:border-gray-800 overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-800">
-                <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+              <tr className="border-b border-gray-200 dark:border-gray-800">
+                <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                   {t("billing.invoice.id")}
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+                <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                   {t("billing.invoice.date")}
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+                <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                   {t("billing.invoice.amount")}
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+                <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                   {t("billing.invoice.status")}
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
-                  {t("billing.invoice.description")}
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+                <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                   {t("billing.invoice.actions")}
                 </th>
               </tr>
@@ -171,25 +168,21 @@ export default function BillingPage() {
             <tbody>
               {invoices.map((invoice) => (
                 <tr key={invoice.id} className="border-b border-gray-800 hover:bg-gray-900/50">
-                  <td className="px-6 py-4 text-gray-200">{invoice.id}</td>
-                  <td className="px-6 py-4 text-gray-200">
-                    {new Date(invoice.date).toLocaleDateString()}
-                  </td>
-                  <td className="px-6 py-4 text-gray-200">R$ {invoice.amount}</td>
+                  <td className="px-6 py-4 text-gray-800 dark:text-gray-200">{invoice.id}</td>
+                  <td className="px-6 py-4 text-gray-800 dark:text-gray-200">{invoice.date}</td>
+                  <td className="px-6 py-4 text-gray-900 dark:text-gray-100 font-semibold">{invoice.amount}</td>
                   <td className="px-6 py-4">
-                    <span
-                      className={`px-3 py-1 rounded-full text-sm ${
-                        invoice.status === "paid"
-                          ? "bg-green-900 text-green-200"
-                          : invoice.status === "pending"
-                          ? "bg-yellow-900 text-yellow-200"
-                          : "bg-red-900 text-red-200"
-                      }`}
-                    >
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      invoice.status === 'paid'
+                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                        : invoice.status === 'pending'
+                        ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                        : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                    }`}>
                       {t(`billing.status.${invoice.status}`)}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-gray-200">{invoice.description}</td>
+                  <td className="px-6 py-4 text-gray-600 dark:text-gray-400">{invoice.description}</td>
                   <td className="px-6 py-4">
                     <button className="text-gray-400 hover:text-gold-600 transition-colors">
                       <svg

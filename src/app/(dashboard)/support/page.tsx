@@ -72,26 +72,26 @@ export default function SupportPage() {
         ))}
       </div>
 
-      <div className="bg-black rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white dark:bg-black rounded-lg shadow-md border border-gray-200 dark:border-gray-800 overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-800">
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+            <tr className="border-b border-gray-200 dark:border-gray-800">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("support.table.ticket")}
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("support.table.status")}
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("support.table.priority")}
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("support.table.category")}
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("support.table.created")}
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("support.table.lastUpdate")}
               </th>
             </tr>
