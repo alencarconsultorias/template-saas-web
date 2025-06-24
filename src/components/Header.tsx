@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSidebar } from "@/contexts/SidebarContext";
+import { MenuIcon } from "@heroicons/react/outline";
 
 export default function Header() {
   const [search, setSearch] = useState("");
@@ -11,6 +13,7 @@ export default function Header() {
   const router = useRouter();
   const { t } = useLanguage();
   const { logout } = useAuth();
+  const { toggleSidebar } = useSidebar();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,9 +31,20 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full bg-black shadow-md px-6 py-3 flex items-center justify-between">
-      {/* Logo ou nome do sistema */}
-      <div className="text-xl font-bold text-gold-600">{t("app.name")}</div>
+    <header className="w-full bg-black shadow-md px-6 py-3 flex items-center justify-between h-16 flex-shrink-0">
+      {/* Left section with sidebar toggle and logo */}
+      <div className="flex items-center gap-4">
+        {/* Sidebar toggle button (desktop only) */}
+        <button
+          onClick={toggleSidebar}
+          className="hidden lg:block p-2 rounded-lg text-gray-400 hover:text-gold-500 hover:bg-gray-800 transition-colors"
+        >
+          <MenuIcon className="h-6 w-6" />
+        </button>
+        
+        {/* Logo ou nome do sistema */}
+        <div className="text-xl font-bold text-gold-600">{t("app.name")}</div>
+      </div>
 
       {/* Barra de pesquisa */}
       <form onSubmit={handleSearch} className="flex-1 flex justify-center mx-6">
