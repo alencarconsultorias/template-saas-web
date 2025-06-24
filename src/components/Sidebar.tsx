@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSidebar } from "@/contexts/SidebarContext";
+import { useAuth } from "@/contexts/AuthContext";
 import {
   ChartBarIcon,
   FolderIcon,
@@ -21,13 +22,13 @@ import {
 
 const navigation = [
   { name: "common.dashboard", href: "/dashboard", icon: HomeIcon },
-  { name: "common.projects", href: "/projects", icon: FolderIcon },
-  { name: "common.analytics", href: "/analytics", icon: ChartBarIcon },
-  { name: "common.reports", href: "/reports", icon: DocumentReportIcon },
-  { name: "common.team", href: "/team", icon: UserGroupIcon },
-  { name: "common.billing", href: "/billing", icon: CreditCardIcon },
-  { name: "common.support", href: "/support", icon: SupportIcon },
-  { name: "common.settings", href: "/settings", icon: CogIcon },
+  { name: "common.projects", href: "/dashboard/projects", icon: FolderIcon },
+  { name: "common.analytics", href: "/dashboard/analytics", icon: ChartBarIcon },
+  { name: "common.reports", href: "/dashboard/reports", icon: DocumentReportIcon },
+  { name: "common.team", href: "/dashboard/team", icon: UserGroupIcon },
+  { name: "common.billing", href: "/dashboard/billing", icon: CreditCardIcon },
+  { name: "common.support", href: "/dashboard/support", icon: SupportIcon },
+  { name: "common.settings", href: "/dashboard/settings", icon: CogIcon },
 ];
 
 export default function Sidebar() {
@@ -35,6 +36,7 @@ export default function Sidebar() {
   const { isCollapsed, toggleSidebar } = useSidebar();
   const pathname = usePathname();
   const { t } = useLanguage();
+  const { user } = useAuth();
 
   return (
     <>
@@ -143,8 +145,8 @@ export default function Sidebar() {
                   <UserGroupIcon className="w-3 h-3 text-gold-600 dark:text-gold-500" />
                 </div>
                 <div className="ml-3 min-w-0">
-                  <p className="text-xs font-medium text-gray-900 dark:text-gray-300 truncate">John Doe</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-500 truncate">Administrator</p>
+                  <p className="text-xs font-medium text-gray-900 dark:text-gray-300 truncate">{user?.displayName || user?.email || "Usuário"}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-500 truncate">{user?.email || ""}</p>
                 </div>
               </motion.div>
             ) : (

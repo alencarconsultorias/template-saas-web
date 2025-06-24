@@ -5,7 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function SettingsPage() {
   const { theme, setTheme } = useTheme();
-  const { t } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -93,7 +93,10 @@ export default function SettingsPage() {
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <button className="p-4 rounded-lg border-2 border-gray-200 dark:border-gray-600 hover:border-gold-300 dark:hover:border-gold-600 transition-all">
+            <button
+              onClick={() => setLanguage("en")}
+              className={`p-4 rounded-lg border-2 ${language === "en" ? "border-gold-500" : "border-gray-200 dark:border-gray-600"} hover:border-gold-300 dark:hover:border-gold-600 transition-all`}
+            >
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm">
                   EN
@@ -109,7 +112,10 @@ export default function SettingsPage() {
               </div>
             </button>
 
-            <button className="p-4 rounded-lg border-2 border-gray-200 dark:border-gray-600 hover:border-gold-300 dark:hover:border-gold-600 transition-all">
+            <button
+              onClick={() => setLanguage("pt-BR")}
+              className={`p-4 rounded-lg border-2 ${language === "pt-BR" ? "border-gold-500" : "border-gray-200 dark:border-gray-600"} hover:border-gold-300 dark:hover:border-gold-600 transition-all`}
+            >
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-sm">
                   PT
