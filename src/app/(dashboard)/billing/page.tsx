@@ -87,15 +87,15 @@ export default function BillingPage() {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold text-gray-100 mb-6">{t("billing.title")}</h1>
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">{t("billing.title")}</h1>
 
       {/* Planos */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         {plans.map((plan) => (
           <div
             key={plan.id}
-            className={`bg-black rounded-lg p-6 border ${
-              plan.recommended ? "border-gold-600" : "border-gray-800"
+            className={`bg-white dark:bg-black rounded-lg p-6 border ${
+              plan.recommended ? "border-gold-600" : "border-gray-200 dark:border-gray-800"
             }`}
           >
             {plan.recommended && (
@@ -103,14 +103,14 @@ export default function BillingPage() {
                 {t("billing.recommended")}
               </div>
             )}
-            <h3 className="text-xl font-bold text-gray-100 mb-2">{plan.name}</h3>
-            <div className="text-3xl font-bold text-gray-100 mb-4">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">{plan.name}</h3>
+            <div className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               R$ {plan.price}
-              <span className="text-sm text-gray-400">/mês</span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">/mês</span>
             </div>
             <ul className="space-y-3 mb-6">
               {plan.features.map((feature, index) => (
-                <li key={index} className="flex items-center text-gray-300">
+                <li key={index} className="flex items-center text-gray-700 dark:text-gray-300">
                   <svg
                     className="h-5 w-5 text-gold-600 mr-2"
                     fill="none"

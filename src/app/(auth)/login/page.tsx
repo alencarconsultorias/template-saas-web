@@ -36,18 +36,18 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-black">
       <div className="w-full max-w-md p-4">
-        <div className="bg-black rounded-2xl shadow-xl p-8 border border-gray-800">
+        <div className="bg-white dark:bg-black rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-800">
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <LogoLogin className="w-64 h-20" />
           </div>
 
-          <h2 className="text-2xl font-bold text-center text-gray-100 mb-2">
+          <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-gray-100 mb-2">
             {t("auth.login.title")}
           </h2>
-          <p className="text-gray-400 text-center mb-8">
+          <p className="text-gray-600 dark:text-gray-400 text-center mb-8">
             {t("auth.login.subtitle")}
           </p>
 
@@ -61,7 +61,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-300 mb-2"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
                 {t("auth.login.email")}
               </label>
@@ -71,7 +71,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-gold-600 transition-colors"
+                className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-gold-600 transition-colors"
                 placeholder={t("auth.login.emailPlaceholder")}
               />
             </div>
@@ -79,7 +79,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-300 mb-2"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
                 {t("auth.login.password")}
               </label>
@@ -89,7 +89,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-gold-600 transition-colors"
+                className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-gold-600 transition-colors"
                 placeholder={t("auth.login.passwordPlaceholder")}
               />
             </div>
@@ -148,7 +148,7 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-gray-400">
+            <p className="text-gray-600 dark:text-gray-400">
               {t("auth.login.noAccount")}{" "}
               <Link
                 href="/register"

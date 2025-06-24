@@ -3,12 +3,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Template SaaS",
-  description: "Template para aplicações SaaS",
+  title: "SaaS Platform",
+  description: "Modern SaaS platform with analytics and management tools",
 };
 
 export default function RootLayout({
@@ -17,11 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR">
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
         <AuthProvider>
           <LanguageProvider>
-            {children}
+            <ThemeProvider>
+              {children}
+            </ThemeProvider>
           </LanguageProvider>
         </AuthProvider>
       </body>

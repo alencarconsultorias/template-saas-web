@@ -72,10 +72,10 @@ export default function ProjectsPage() {
         {mockProjects.map((project) => (
           <div
             key={project.id}
-            className="bg-black rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+            className="bg-white dark:bg-black rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-800 hover:shadow-lg transition-shadow"
           >
             <div className="flex justify-between items-start mb-4">
-              <h3 className="font-semibold text-lg text-gray-100">{project.name}</h3>
+              <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100">{project.name}</h3>
               <span
                 className={`px-3 py-1 rounded-full text-sm ${
                   project.status === "active"
@@ -90,11 +90,11 @@ export default function ProjectsPage() {
             </div>
 
             <div className="mb-4">
-              <div className="flex justify-between text-sm text-gray-400 mb-1">
+              <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
                 <span>{t("projects.progress")}</span>
                 <span>{project.progress}%</span>
               </div>
-              <div className="w-full bg-gray-800 rounded-full h-2">
+              <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-2">
                 <div
                   className="bg-gold-600 rounded-full h-2 transition-all"
                   style={{ width: `${project.progress}%` }}
