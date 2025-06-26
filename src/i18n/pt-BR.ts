@@ -224,5 +224,17 @@ export const ptBR = {
       invalidCredentials: "E-mail ou senha inválidos. Por favor, tente novamente.",
       generic: "Ocorreu um erro inesperado. Por favor, tente novamente.",
     },
+    forgotPassword: {
+      title: "Redefinir Senha",
+      subtitle: "Digite seu e-mail e enviaremos instruções para redefinir sua senha",
+      submit: "Enviar instruções de redefinição",
+      successTitle: "Verifique seu e-mail",
+      successMessage: "Enviamos instruções de redefinição de senha para seu e-mail.",
+      backToLogin: "Voltar para o login",
+      errors: {
+        notFound: "Nenhum usuário encontrado com este e-mail.",
+        generic: "Ocorreu um erro. Tente novamente.",
+      },
+    },
   },
 }; 

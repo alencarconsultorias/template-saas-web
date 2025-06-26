@@ -10,6 +10,7 @@ import {
   User,
   GoogleAuthProvider,
   signInWithPopup,
+  sendPasswordResetEmail as firebaseSendPasswordResetEmail,
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { useRouter } from "next/navigation";
@@ -35,6 +36,7 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
+  sendPasswordResetEmail: (email: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
@@ -108,8 +110,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const sendPasswordResetEmail = async (email: string) => {
+    try {
+      await firebaseSendPasswordResetEmail(auth, email);
+    } catch (error) {
+      throw error;
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, signUp, signIn, logout, signInWithGoogle }}>
+    <AuthContext.Provider value={{ user, loading, signUp, signIn, logout, signInWithGoogle, sendPasswordResetEmail }}>
       {children}
     </AuthContext.Provider>
   );

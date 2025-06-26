@@ -224,5 +224,17 @@ export const en = {
       invalidCredentials: "Invalid email or password. Please try again.",
       generic: "An unexpected error occurred. Please try again.",
     },
+    forgotPassword: {
+      title: "Reset Password",
+      subtitle: "Enter your email address and we'll send you instructions to reset your password",
+      submit: "Send Reset Instructions",
+      successTitle: "Check your email",
+      successMessage: "We've sent password reset instructions to your email address.",
+      backToLogin: "Back to Sign in",
+      errors: {
+        notFound: "No user found with this email.",
+        generic: "An error occurred. Please try again.",
+      },
+    },
   },
 }; 
