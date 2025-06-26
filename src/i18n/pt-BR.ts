@@ -196,6 +196,7 @@ export const ptBR = {
       rememberMe: "Lembrar-me",
       forgotPassword: "Esqueceu sua senha?",
       submit: "Entrar",
+      signInWithGoogle: "Entrar com Google",
       noAccount: "Não tem uma conta?",
       registerLink: "Criar uma conta",
       loading: "Entrando...",
