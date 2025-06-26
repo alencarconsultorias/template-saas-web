@@ -4,6 +4,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSidebar } from "@/contexts/SidebarContext";
+import { useTheme } from "@/contexts/ThemeContext";
+import { MenuIcon } from "@heroicons/react/outline";
 
 export default function Header() {
   const [search, setSearch] = useState("");
@@ -11,6 +14,8 @@ export default function Header() {
   const router = useRouter();
   const { t } = useLanguage();
   const { logout } = useAuth();
+  const { toggleSidebar } = useSidebar();
+  const { theme, toggleTheme } = useTheme();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,9 +33,20 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full bg-black shadow-md px-6 py-3 flex items-center justify-between">
-      {/* Logo ou nome do sistema */}
-      <div className="text-xl font-bold text-gold-600">{t("app.name")}</div>
+    <header className="w-full bg-white dark:bg-gray-900 shadow-md px-6 py-3 flex items-center justify-between h-16 flex-shrink-0 border-b border-gray-200 dark:border-gray-700">
+      {/* Left section with sidebar toggle and logo */}
+      <div className="flex items-center gap-4">
+        {/* Sidebar toggle button (desktop only) */}
+        <button
+          onClick={toggleSidebar}
+          className="hidden lg:block p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-gold-500 dark:hover:text-gold-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+        >
+          <MenuIcon className="h-6 w-6" />
+        </button>
+        
+        {/* Logo ou nome do sistema */}
+        <div className="text-xl font-bold text-gray-900 dark:text-gold-600">{t("app.name")}</div>
+      </div>
 
       {/* Barra de pesquisa */}
       <form onSubmit={handleSearch} className="flex-1 flex justify-center mx-6">
@@ -40,7 +56,7 @@ export default function Header() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder={t("search.placeholder")}
-            className="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-900 text-gray-100 border border-gray-700 focus:outline-none focus:border-gold-600"
+            className="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 focus:outline-none focus:border-gold-500 dark:focus:border-gold-500 focus:ring-1 focus:ring-gold-500 dark:focus:ring-gold-500"
           />
           <svg
             className="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
@@ -60,8 +76,24 @@ export default function Header() {
 
       {/* Botões à direita */}
       <div className="flex items-center gap-4">
+        {/* Theme toggle button */}
+        <button
+          onClick={toggleTheme}
+          className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+        >
+          {theme === 'dark' ? (
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          ) : (
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          )}
+        </button>
+
         <Link href="/dashboard/support">
-          <button className="p-2 rounded-lg bg-gold-600 text-white hover:bg-gold-700 transition-colors">
+          <button className="p-2 rounded-lg bg-gold-500 dark:bg-gold-600 text-white hover:bg-gold-600 dark:hover:bg-gold-700 transition-colors">
             <svg
               className="h-6 w-6"
               fill="none"
@@ -80,7 +112,7 @@ export default function Header() {
         <div className="relative">
           <button
             onClick={() => setShowProfileMenu(!showProfileMenu)}
-            className="p-2 rounded-lg bg-gray-800 text-gold-600 hover:bg-gold-600 hover:text-white transition-colors"
+            className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gold-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
             <svg
               className="h-6 w-6"
@@ -97,10 +129,10 @@ export default function Header() {
             </svg>
           </button>
           {showProfileMenu && (
-            <div className="absolute right-0 mt-2 w-48 bg-gray-900 rounded-lg shadow-lg py-2 z-10">
+            <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg py-2 z-10 border border-gray-200 dark:border-gray-700">
               <Link 
                 href="/settings"
-                className="flex items-center px-4 py-2 text-gray-300 hover:bg-gold-600 hover:text-white transition-colors"
+                className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-50 dark:hover:bg-gold-600 hover:text-gold-700 dark:hover:text-white transition-colors"
               >
                 <svg
                   className="h-5 w-5 mr-2"
@@ -125,7 +157,7 @@ export default function Header() {
               </Link>
               <Link 
                 href="/dashboard/profile"
-                className="flex items-center px-4 py-2 text-gray-300 hover:bg-gold-600 hover:text-white transition-colors"
+                className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-50 dark:hover:bg-gold-600 hover:text-gold-700 dark:hover:text-white transition-colors"
               >
                 <svg
                   className="h-5 w-5 mr-2"
@@ -144,7 +176,7 @@ export default function Header() {
               </Link>
               <button
                 onClick={handleLogout}
-                className="flex items-center w-full px-4 py-2 text-gray-300 hover:bg-gold-600 hover:text-white transition-colors"
+                className="flex items-center w-full px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-50 dark:hover:bg-gold-600 hover:text-gold-700 dark:hover:text-white transition-colors"
               >
                 <svg
                   className="h-5 w-5 mr-2"

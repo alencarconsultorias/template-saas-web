@@ -44,7 +44,8 @@ export default function TeamPage() {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-100">{t("team.title")}</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{t("team.title")}</h1>
+        <p className="text-gray-600 dark:text-gray-400">{t("team.subtitle")}</p>
         <button className="bg-gold-600 text-white px-4 py-2 rounded-lg hover:bg-gold-700 transition-colors">
           {t("team.invite")}
         </button>
@@ -74,27 +75,27 @@ export default function TeamPage() {
       </div>
 
       {/* Lista de Membros */}
-      <div className="bg-black rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white dark:bg-black rounded-lg shadow-md overflow-hidden border border-gray-200 dark:border-gray-800">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-800">
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+            <tr className="border-b border-gray-200 dark:border-gray-800">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("team.table.member")}
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("team.table.role")}
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("team.table.status")}
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("team.table.actions")}
               </th>
             </tr>
           </thead>
           <tbody>
             {members.map((member) => (
-              <tr key={member.id} className="border-b border-gray-800 hover:bg-gray-900/50">
+              <tr key={member.id} className="border-b border-gray-200 dark:border-gray-800 hover:bg-gray-900/50">
                 <td className="px-6 py-4">
                   <div className="flex items-center">
                     <img
@@ -103,13 +104,13 @@ export default function TeamPage() {
                       className="h-10 w-10 rounded-full mr-3"
                     />
                     <div>
-                      <div className="font-medium text-gray-200">{member.name}</div>
-                      <div className="text-sm text-gray-400">{member.email}</div>
+                      <div className="font-medium text-gray-900 dark:text-gray-200">{member.name}</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">{member.email}</div>
                     </div>
                   </div>
                 </td>
                 <td className="px-6 py-4">
-                  <span className="px-3 py-1 rounded-full text-sm bg-gray-800 text-gray-300">
+                  <span className="px-3 py-1 rounded-full text-sm bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
                     {t(`team.roles.${member.role}`)}
                   </span>
                 </td>

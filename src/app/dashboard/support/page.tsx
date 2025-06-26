@@ -50,7 +50,7 @@ export default function SupportPage() {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-100">{t("support.title")}</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{t("support.title")}</h1>
         <button className="bg-gold-600 text-white px-4 py-2 rounded-lg hover:bg-gold-700 transition-colors">
           {t("support.newTicket")}
         </button>
@@ -64,7 +64,7 @@ export default function SupportPage() {
             className={`px-4 py-2 rounded-lg transition-colors ${
               filter === filterOption
                 ? "bg-gold-600 text-white"
-                : "bg-black text-gray-300 hover:bg-gold-500/5"
+                : "bg-white dark:bg-black text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-800 hover:bg-gold-50 dark:hover:bg-gold-500/5"
             }`}
           >
             {t(`support.filters.${filterOption}`)}
@@ -72,37 +72,37 @@ export default function SupportPage() {
         ))}
       </div>
 
-      <div className="bg-black rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white dark:bg-black rounded-lg shadow-md border border-gray-200 dark:border-gray-800 overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-800">
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+            <tr className="border-b border-gray-200 dark:border-gray-800">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("support.table.ticket")}
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("support.table.status")}
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("support.table.priority")}
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("support.table.category")}
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("support.table.created")}
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-400">
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-400">
                 {t("support.table.lastUpdate")}
               </th>
             </tr>
           </thead>
           <tbody>
             {mockTickets.map((ticket) => (
-              <tr key={ticket.id} className="border-b border-gray-800 hover:bg-gray-900/50">
+              <tr key={ticket.id} className="border-b border-gray-200 dark:border-gray-800 hover:bg-gray-900/50">
                 <td className="px-6 py-4">
                   <div>
-                    <div className="font-medium text-gray-200">{ticket.title}</div>
-                    <div className="text-sm text-gray-400">{ticket.id}</div>
+                    <div className="font-medium text-gray-900 dark:text-gray-200">{ticket.title}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{ticket.id}</div>
                   </div>
                 </td>
                 <td className="px-6 py-4">

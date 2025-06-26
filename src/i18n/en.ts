@@ -196,6 +196,7 @@ export const en = {
       rememberMe: "Remember me",
       forgotPassword: "Forgot your password?",
       submit: "Sign In",
+      signInWithGoogle: "Sign in with Google",
       noAccount: "Don't have an account?",
       registerLink: "Create an account",
       loading: "Signing In...",

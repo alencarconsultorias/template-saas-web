@@ -20,6 +20,7 @@ import {
   CurrencyDollarIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/outline";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const areaData = [
   { name: "Jan", value: 4000 },
@@ -69,13 +70,14 @@ const stats = [
 
 export default function DashboardPage() {
   const { t } = useLanguage();
+  const { theme } = useTheme();
 
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-100">{t("common.dashboard")}</h1>
-          <p className="text-gray-400">{t("dashboard.summary")}</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{t("common.dashboard")}</h1>
+          <p className="text-gray-600 dark:text-gray-400">{t("dashboard.summary")}</p>
         </div>
       </div>
 
@@ -86,20 +88,20 @@ export default function DashboardPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
-            className="bg-secondary p-6 rounded-xl shadow-lg"
+            className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 rounded-xl shadow-lg"
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-400">{t(stat.name)}</p>
-                <p className="text-2xl font-semibold text-gray-100 mt-1">{stat.value}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t(stat.name)}</p>
+                <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-1">{stat.value}</p>
               </div>
               <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
                 <stat.icon className="w-6 h-6 text-primary" />
               </div>
             </div>
             <div className="mt-4 flex items-center">
-              <span className="text-green-400 text-sm font-medium">{stat.change}</span>
-              <span className="text-gray-400 text-sm ml-2">{t("dashboard.vsLastMonth")}</span>
+              <span className="text-green-600 dark:text-green-400 text-sm font-medium">{stat.change}</span>
+              <span className="text-gray-600 dark:text-gray-400 text-sm ml-2">{t("dashboard.vsLastMonth")}</span>
             </div>
           </motion.div>
         ))}
@@ -110,9 +112,9 @@ export default function DashboardPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.4 }}
-          className="bg-secondary p-6 rounded-xl shadow-lg"
+          className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 rounded-xl shadow-lg"
         >
-          <h2 className="text-lg font-semibold text-gray-100 mb-4">{t("dashboard.revenueOverview")}</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{t("dashboard.revenueOverview")}</h2>
           <div className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={areaData}>
@@ -123,13 +125,14 @@ export default function DashboardPage() {
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#2D2D2D" />
-                <XAxis dataKey="name" stroke="#6B7280" />
-                <YAxis stroke="#6B7280" />
+                <XAxis dataKey="name" stroke="#6B7280" tick={{ fill: '#374151' }} />
+                <YAxis stroke="#6B7280" tick={{ fill: '#374151' }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#1A1A1A",
-                    border: "none",
-                    borderRadius: "0.5rem",
+                    backgroundColor: theme === 'dark' ? '#1A1A1A' : '#fff',
+                    color: theme === 'dark' ? '#fff' : '#222',
+                    border: 'none',
+                    borderRadius: '0.5rem',
                   }}
                 />
                 <Area
@@ -148,9 +151,9 @@ export default function DashboardPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.5 }}
-          className="bg-secondary p-6 rounded-xl shadow-lg"
+          className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 rounded-xl shadow-lg"
         >
-          <h2 className="text-lg font-semibold text-gray-100 mb-4">{t("dashboard.salesOverview")}</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{t("dashboard.salesOverview")}</h2>
           <div className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -170,9 +173,10 @@ export default function DashboardPage() {
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#1A1A1A",
-                    border: "none",
-                    borderRadius: "0.5rem",
+                    backgroundColor: theme === 'dark' ? '#1A1A1A' : '#fff',
+                    color: theme === 'dark' ? '#fff' : '#222',
+                    border: 'none',
+                    borderRadius: '0.5rem',
                   }}
                 />
               </PieChart>

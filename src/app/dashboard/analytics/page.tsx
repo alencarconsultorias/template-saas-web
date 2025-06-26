@@ -33,7 +33,7 @@ export default function AnalyticsPage() {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-100">{t("analytics.title")}</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{t("analytics.title")}</h1>
         <div className="flex gap-2">
           {(["daily", "weekly", "monthly", "yearly"] as const).map((period) => (
             <button
@@ -58,10 +58,10 @@ export default function AnalyticsPage() {
           const percentageChange = ((latestValue - previousValue) / previousValue) * 100;
 
           return (
-            <div key={key} className="bg-black rounded-lg shadow-md p-6">
-              <h3 className="text-gray-400 mb-2">{t(`analytics.metrics.${key}`)}</h3>
+            <div key={key} className="bg-white dark:bg-black rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-800">
+              <h3 className="text-gray-600 dark:text-gray-400 mb-2">{t(`analytics.metrics.${key}`)}</h3>
               <div className="flex items-end gap-2">
-                <span className="text-2xl font-bold text-gray-100">
+                <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   {key === "conversion" || key === "engagement"
                     ? `${latestValue}%`
                     : key === "revenue"
@@ -83,16 +83,16 @@ export default function AnalyticsPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-black rounded-lg shadow-md p-6">
-          <h3 className="text-lg font-semibold text-gray-100 mb-4">{t("analytics.charts.revenue")}</h3>
-          <div className="h-64 bg-gray-900 rounded-lg flex items-center justify-center text-gray-400 border border-gray-800">
+        <div className="bg-white dark:bg-black rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-800">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{t("analytics.charts.revenue")}</h3>
+          <div className="h-64 bg-gray-100 dark:bg-gray-900 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-800">
             {t("analytics.charts.revenue")}
           </div>
         </div>
 
-        <div className="bg-black rounded-lg shadow-md p-6">
-          <h3 className="text-lg font-semibold text-gray-100 mb-4">{t("analytics.charts.users")}</h3>
-          <div className="h-64 bg-gray-900 rounded-lg flex items-center justify-center text-gray-400 border border-gray-800">
+        <div className="bg-white dark:bg-black rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-800">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{t("analytics.charts.users")}</h3>
+          <div className="h-64 bg-gray-100 dark:bg-gray-900 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-800">
             {t("analytics.charts.users")}
           </div>
         </div>
