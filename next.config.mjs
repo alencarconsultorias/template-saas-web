@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'export',
+  output: 'standalone', // Configuração para Docker
+  // output: 'export', // Comentado para permitir npm run start
   images: { unoptimized: true },
   webpack(config) {
     // Importa a configuração padrão de regra de módulo de arquivos
