@@ -1,9 +1,0 @@
-{
-  "scripts": {
-    "build": "nest build",
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "test": "jest",
-    "lint": "eslint . --ext .ts"
-  }
-}
