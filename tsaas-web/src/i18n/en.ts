@@ -66,7 +66,9 @@ export const en = {
   },
   reports: {
     title: "Reports",
+    subtitle: "Detailed data analysis and metrics",
     generate: "Generate Report",
+    download: "Download Report",
     types: {
       financial: "Financial Report",
       performance: "Performance Report",
@@ -75,11 +77,24 @@ export const en = {
     },
     period: "Period",
     format: "Format",
+    stats: {
+      totalRevenue: "Total Revenue",
+      totalUsers: "Total Users",
+      totalSales: "Total Sales",
+      conversionRate: "Conversion Rate",
+      vsLastMonth: "vs last month",
+    },
+    charts: {
+      revenue: "Revenue Chart",
+      users: "Users Chart",
+    },
   },
   team: {
     title: "Team Management",
+    subtitle: "Manage team members and permissions",
     members: "Team Members",
     invite: "Invite Member",
+    search: "Search members...",
     roles: {
       admin: "Administrator",
       manager: "Manager",
@@ -90,6 +105,19 @@ export const en = {
       inactive: "Inactive",
       pending: "Pending",
     },
+    filters: {
+      all: "All Members",
+      active: "Active",
+      inactive: "Inactive",
+      pending: "Pending",
+      allRoles: "All Roles",
+    },
+    table: {
+      member: "Member",
+      role: "Role",
+      status: "Status",
+      actions: "Actions",
+    },
   },
   billing: {
     title: "Billing",
@@ -98,14 +126,30 @@ export const en = {
     paymentMethod: "Payment Method",
     invoices: "Invoices",
     upgrade: "Upgrade Plan",
+    recommended: "Recommended",
+    selectPlan: "Select Plan",
+    invoiceHistory: "Invoice History",
     plans: {
       basic: "Basic",
       pro: "Professional",
       enterprise: "Enterprise",
     },
+    invoice: {
+      id: "Invoice ID",
+      date: "Date",
+      amount: "Amount",
+      status: "Status",
+      actions: "Actions",
+    },
+    status: {
+      paid: "Paid",
+      pending: "Pending",
+      failed: "Failed",
+    },
   },
   support: {
     title: "Support",
+    newTicket: "New Ticket",
     createTicket: "Create Ticket",
     myTickets: "My Tickets",
     status: {
@@ -124,6 +168,19 @@ export const en = {
       description: "Description",
       priority: "Priority",
       submit: "Submit Ticket",
+    },
+    filters: {
+      all: "All",
+      open: "Open",
+      inProgress: "In Progress",
+      resolved: "Resolved",
+    },
+    table: {
+      ticket: "Ticket",
+      status: "Status",
+      priority: "Priority",
+      category: "Category",
+      created: "Created",
     },
   },
   settings: {
@@ -170,11 +227,13 @@ export const en = {
   },
   profile: {
     title: "Edit Profile",
+    description: "Update your personal information and preferences",
     photo: {
       title: "Profile Photo",
       alt: "Profile photo",
       noPhoto: "No photo",
       choose: "Choose Photo",
+      click: "Click to change",
     },
     personalInfo: {
       title: "Personal Information",

@@ -66,7 +66,9 @@ export const ptBR = {
   },
   reports: {
     title: "Relatórios",
+    subtitle: "Análise detalhada de dados e métricas",
     generate: "Gerar Relatório",
+    download: "Baixar Relatório",
     types: {
       financial: "Relatório Financeiro",
       performance: "Relatório de Desempenho",
@@ -75,11 +77,24 @@ export const ptBR = {
     },
     period: "Período",
     format: "Formato",
+    stats: {
+      totalRevenue: "Receita Total",
+      totalUsers: "Total de Usuários",
+      totalSales: "Total de Vendas",
+      conversionRate: "Taxa de Conversão",
+      vsLastMonth: "vs mês anterior",
+    },
+    charts: {
+      revenue: "Gráfico de Receita",
+      users: "Gráfico de Usuários",
+    },
   },
   team: {
     title: "Gerenciamento de Equipe",
+    subtitle: "Gerencie membros e permissões da equipe",
     members: "Membros da Equipe",
     invite: "Convidar Membro",
+    search: "Buscar membros...",
     roles: {
       admin: "Administrador",
       manager: "Gerente",
@@ -90,6 +105,19 @@ export const ptBR = {
       inactive: "Inativo",
       pending: "Pendente",
     },
+    filters: {
+      all: "Todos os Membros",
+      active: "Ativos",
+      inactive: "Inativos",
+      pending: "Pendentes",
+      allRoles: "Todas as Funções",
+    },
+    table: {
+      member: "Membro",
+      role: "Função",
+      status: "Status",
+      actions: "Ações",
+    },
   },
   billing: {
     title: "Faturamento",
@@ -98,14 +126,30 @@ export const ptBR = {
     paymentMethod: "Método de Pagamento",
     invoices: "Faturas",
     upgrade: "Atualizar Plano",
+    recommended: "Recomendado",
+    selectPlan: "Selecionar Plano",
+    invoiceHistory: "Histórico de Faturas",
     plans: {
       basic: "Básico",
       pro: "Profissional",
       enterprise: "Empresarial",
     },
+    invoice: {
+      id: "ID da Fatura",
+      date: "Data",
+      amount: "Valor",
+      status: "Status",
+      actions: "Ações",
+    },
+    status: {
+      paid: "Pago",
+      pending: "Pendente",
+      failed: "Falhou",
+    },
   },
   support: {
     title: "Suporte",
+    newTicket: "Novo Chamado",
     createTicket: "Criar Chamado",
     myTickets: "Meus Chamados",
     status: {
@@ -124,6 +168,19 @@ export const ptBR = {
       description: "Descrição",
       priority: "Prioridade",
       submit: "Enviar Chamado",
+    },
+    filters: {
+      all: "Todos",
+      open: "Abertos",
+      inProgress: "Em Andamento",
+      resolved: "Resolvidos",
+    },
+    table: {
+      ticket: "Chamado",
+      status: "Status",
+      priority: "Prioridade",
+      category: "Categoria",
+      created: "Criado",
     },
   },
   settings: {
@@ -170,11 +227,13 @@ export const ptBR = {
   },
   profile: {
     title: "Editar Perfil",
+    description: "Atualize suas informações pessoais e preferências",
     photo: {
       title: "Foto de Perfil",
       alt: "Foto de perfil",
       noPhoto: "Sem foto",
       choose: "Escolher Foto",
+      click: "Clique para alterar",
     },
     personalInfo: {
       title: "Informações Pessoais",
