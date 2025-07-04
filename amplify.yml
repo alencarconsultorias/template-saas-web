@@ -1,0 +1,19 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - cd tsaas-web
+        - npm ci
+    build:
+      commands:
+        - cd tsaas-web
+        - npm run build
+  artifacts:
+    baseDirectory: tsaas-web/out
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - tsaas-web/node_modules/**/*
+      - tsaas-web/.next/cache/**/* 
