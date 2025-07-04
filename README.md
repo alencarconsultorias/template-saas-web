@@ -1,15 +1,21 @@
 # template saas web
 
 ## ⚙️ Configuração do Ambiente 
-1. Passo 1 
-2. Passo 2 
+Para executar o projeto independente do ambiente:
 ```bash
-#comando terminal ou algo similar 
+# para rodar em dev
+cd /tsaas-web
+npm run dev 
+# para rodar em prod
+cd /tsaas-web
+npm run build
+npm start
 ```
 
 🚨 Atenção: requisito necessario para rodar o projeto
 ```bash
-#comando terminal, arquivo, script... 
+# instalar dependencias do node
+npm install 
 ```
 
 ## 📚 Confluence  
