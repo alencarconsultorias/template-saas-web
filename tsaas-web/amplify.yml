@@ -1,10 +1,6 @@
 version: 1
 frontend:
   phases:
-    preBuild:
-      commands:
-        - cd tsaas-web
-        - npm ci
     build:
       commands:
         - cd tsaas-web
