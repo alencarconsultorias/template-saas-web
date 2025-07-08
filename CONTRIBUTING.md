@@ -6,10 +6,12 @@ Obrigado por contribuir com este projeto! Para mantermos um fluxo de trabalho or
 
 ## 🌐 Branches
 
-- `main`: Versão estável em produção.
-- `dev`: Versão de desenvolvimento com recursos em teste.
-- `feature/JIRA-123-nome-da-feature`: Para novas funcionalidades.
-- `bugfix/JIRA-456-corrigir-erro-x`: Para correções de bugs.
+- `main`: Versão estável em produção; 
+- `dev`: Versão de desenvolvimento com recursos em teste; 
+- `hml`: Versão semelhante ao produção para testes a/b reais;
+- `release/vX.X.X`: Rastreamento de versões;   
+- `feature/JIRA-123-nome-da-feature`: Para novas funcionalidades;
+- `bugfix/JIRA-456-corrigir-erro-x`: Para correções de bugs; 
 - `hotfix/JIRA-789-ajuste-critico`: Para correções urgentes em produção.
 
 **🔗 Nome das branches deve conter o ID da tarefa no Jira.**
@@ -31,20 +33,24 @@ Obrigado por contribuir com este projeto! Para mantermos um fluxo de trabalho or
 
 ## 📦 Pull Requests
 
-- Crie PRs sempre com destino à branch `dev`.
-- Use título e descrição claros.
+- Crie PRs sempre com destino à branch `dev` ou `main`; 
+- Use título e descrição claros; 
 - Relacione PRs a tarefas do Jira:  
   `Fixes JIRA-123`
-- Adicione checklist de itens testados ou revisados.
+- Adicione checklist de itens testados ou revisados; 
 - Aguarde revisão e aprovação antes de fazer o merge.
+
+**🚨 Use o template disponivel [PR TEMPLATE](./github/PULL_REQUEST_TEMPLATE.md).**
 
 ---
 
 ## ✅ Testes
 
-- Adicione **testes automatizados** para novas funcionalidades.
-- Rode `npm test` ou o comando equivalente do projeto antes de abrir um PR.
+- Adicione **scripts e testes automatizados** para novas funcionalidades; 
+- Rode `npm test` ou o comando equivalente do projeto antes de abrir um PR; 
 - Documente o que foi testado no Jira e na descrição do PR.
+
+**💡 Crie um docker-compose para garantir dependencia e testes locais.**
 
 ---
 
@@ -55,9 +61,13 @@ Obrigado por contribuir com este projeto! Para mantermos um fluxo de trabalho or
 - Marque a tarefa como **“Em Revisão”** ao abrir um Pull Request.
 - Após o merge, mova a tarefa para **“Concluído”**.
 
+**❌ Em casos de impedimentos na tarefa, mova para `blocked`!** 
+
 ---
 
 ## 📚 Documentação
 
 - Atualize a documentação técnica quando necessário (ex: README, Confluence, etc.).
 - Referencie os documentos no comentário da tarefa no Jira ou PR.
+
+[Espaço de trabalho Confluence](https://alencar-consultorias.atlassian.net/wiki/spaces/tsaas/overview?homepageId=3899698)

@@ -15,4 +15,4 @@ Nos comprometemos a fornecer um ambiente acolhedor, seguro e respeitoso para tod
 - Ataques pessoais
 
 ## Denúncias
-Denúncias podem ser feitas via e-mail: `contato@alencarconsultorias.com`
+Denúncias podem ser feitas via e-mail: `contato@alencarconsultorias.com.br`

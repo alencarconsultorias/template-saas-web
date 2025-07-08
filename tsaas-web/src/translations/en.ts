@@ -1,0 +1,112 @@
+export const en = {
+  // ... existing translations ...
+  reports: {
+    title: "Reports",
+    filters: {
+      all: "All",
+      today: "Today",
+      week: "This Week",
+      month: "This Month",
+      year: "This Year",
+      custom: "Custom",
+    },
+    table: {
+      id: "ID",
+      date: "Date",
+      type: "Type",
+      status: "Status",
+      actions: "Actions",
+    },
+    status: {
+      completed: "Completed",
+      processing: "Processing",
+      failed: "Failed",
+    },
+    type: {
+      sales: "Sales",
+      inventory: "Inventory",
+      financial: "Financial",
+    },
+  },
+  team: {
+    title: "Team",
+    invite: "Invite Member",
+    search: "Search members...",
+    filters: {
+      all: "All Members",
+      active: "Active",
+      inactive: "Inactive",
+      pending: "Pending",
+      allRoles: "All Roles",
+    },
+    roles: {
+      admin: "Administrator",
+      manager: "Manager",
+      member: "Member",
+    },
+    status: {
+      active: "Active",
+      inactive: "Inactive",
+      pending: "Pending",
+    },
+    table: {
+      member: "Member",
+      role: "Role",
+      status: "Status",
+      actions: "Actions",
+    },
+  },
+  billing: {
+    title: "Billing",
+    recommended: "Recommended",
+    selectPlan: "Select Plan",
+    invoiceHistory: "Invoice History",
+    invoice: {
+      id: "Invoice ID",
+      date: "Date",
+      amount: "Amount",
+      status: "Status",
+      description: "Description",
+      actions: "Actions",
+    },
+    status: {
+      paid: "Paid",
+      pending: "Pending",
+      failed: "Failed",
+    },
+  },
+  auth: {
+    login: {
+      title: "Welcome Back",
+      subtitle: "Sign in to your account to continue",
+      email: "Email address",
+      password: "Password",
+      submit: "Sign in",
+      loading: "Signing in...",
+      registerLink: "Create an account",
+      noAccount: "Don't have an account?",
+      rememberMe: "Remember me",
+      forgotPassword: "Forgot your password?",
+    },
+    register: {
+      title: "Create Account",
+      subtitle: "Join us today",
+      email: "Email address",
+      password: "Password",
+      confirmPassword: "Confirm password",
+      submit: "Create account",
+      loading: "Creating account...",
+      loginLink: "Already have an account? Sign in",
+      errors: {
+        passwordMismatch: "Passwords do not match",
+        emailInUse: "Email is already in use",
+        weakPassword: "Password is too weak",
+        generic: "An error occurred. Please try again.",
+      },
+    },
+    errors: {
+      invalidCredentials: "Invalid email or password",
+      generic: "An error occurred. Please try again.",
+    },
+  },
+}; 
