@@ -263,8 +263,12 @@ export const en = {
     register: {
       title: "Join Our Platform",
       subtitle: "Create your account to get started.",
+      fullName: "Full Name",
+      fullNamePlaceholder: "Enter your full name",
       email: "Email Address",
       emailPlaceholder: "your@email.com",
+      phone: "Phone",
+      phonePlaceholder: "Enter your phone number",
       password: "Password",
       passwordPlaceholder: "••••••••",
       confirmPassword: "Confirm Password",
