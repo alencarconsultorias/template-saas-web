@@ -296,8 +296,12 @@ export const en = {
       backToLogin: "Back to Sign in",
       errors: {
         notFound: "No user found with this email.",
+        invalidEmail: "Invalid email format. Please check if you typed it correctly.",
+        tooManyRequests: "Too many attempts. Please wait a few minutes before trying again.",
         generic: "An error occurred. Please try again.",
       },
+      noAccount: "Don't have an account?",
+      createAccount: "Create account",
     },
   },
 }; 

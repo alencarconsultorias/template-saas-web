@@ -296,8 +296,12 @@ export const ptBR = {
       backToLogin: "Voltar para o login",
       errors: {
         notFound: "Nenhum usuário encontrado com este e-mail.",
+        invalidEmail: "Formato de e-mail inválido. Verifique se digitou corretamente.",
+        tooManyRequests: "Muitas tentativas. Aguarde alguns minutos antes de tentar novamente.",
         generic: "Ocorreu um erro. Tente novamente.",
       },
+      noAccount: "Não tem uma conta?",
+      createAccount: "Criar conta",
     },
   },
 }; 
