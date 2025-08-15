@@ -11,9 +11,7 @@ export default function RegisterPage() {
   const { t } = useLanguage();
   const { signUp } = useAuth();
   const router = useRouter();
-  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -31,7 +29,7 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      await signUp(email, password, fullName, phone);
+      await signUp(email, password);
       router.push("/dashboard");
     } catch (error: any) {
       if (error.code === "auth/email-already-in-use") {
@@ -71,24 +69,6 @@ export default function RegisterPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label
-                htmlFor="fullName"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-              >
-                {t("auth.register.fullName")}
-              </label>
-              <input
-                id="fullName"
-                type="text"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                required
-                className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-gold-600 transition-colors"
-                placeholder={t("auth.register.fullNamePlaceholder")}
-              />
-            </div>
-
-            <div>
-              <label
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
@@ -102,24 +82,6 @@ export default function RegisterPage() {
                 required
                 className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-gold-600 transition-colors"
                 placeholder={t("auth.register.emailPlaceholder")}
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-              >
-                {t("auth.register.phone")}
-              </label>
-              <input
-                id="phone"
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                required
-                className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-gold-600 transition-colors"
-                placeholder={t("auth.register.phonePlaceholder")}
               />
             </div>
 
