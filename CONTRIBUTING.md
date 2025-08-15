@@ -57,7 +57,7 @@ Obrigado por contribuir com este projeto! Para mantermos um fluxo de trabalho or
 ## 📌 Integração com Jira
 
 - **Antes de começar qualquer tarefa**, mova o cartão para “Em progresso”.
-- Ao criar branches, sempre use o **ID da tarefa do Jira**.
+- Ao criar branches, sempre use o **ID da tarefa do Jira**. Ex.: feature/JIRA-123-login. 
 - Marque a tarefa como **“Em Revisão”** ao abrir um Pull Request.
 - Após o merge, mova a tarefa para **“Concluído”**.
 

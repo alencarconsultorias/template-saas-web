@@ -263,8 +263,12 @@ export const ptBR = {
     register: {
       title: "Junte-se à Nossa Plataforma",
       subtitle: "Crie sua conta para começar.",
+      fullName: "Nome Completo",
+      fullNamePlaceholder: "Digite seu nome completo",
       email: "Endereço de E-mail",
       emailPlaceholder: "seu@email.com",
+      phone: "Telefone",
+      phonePlaceholder: "Digite seu telefone",
       password: "Senha",
       passwordPlaceholder: "••••••••",
       confirmPassword: "Confirmar Senha",
