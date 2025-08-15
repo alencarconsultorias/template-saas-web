@@ -27,7 +27,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ---
 
-## [1.0.1] - DD-MM-YY
+## [Unreleased] - YYY-MM-DD
 
 ### Alterado: 
 - [TSAAS-118] Adicionado campos para cadastro do usuario como Nome Completo e Telefone;    
@@ -35,7 +35,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ---
 
-## [1.0.0] - 09-07-2025
+## [1.0.0] - 2025-07-09
 
 ### Adicionado
 - Sistema de Autenticacao com Firebase (E-mail/Senha e Google);  
