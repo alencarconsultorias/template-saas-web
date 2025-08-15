@@ -263,12 +263,8 @@ export const en = {
     register: {
       title: "Join Our Platform",
       subtitle: "Create your account to get started.",
-      fullName: "Full Name",
-      fullNamePlaceholder: "Enter your full name",
       email: "Email Address",
       emailPlaceholder: "your@email.com",
-      phone: "Phone",
-      phonePlaceholder: "Enter your phone number",
       password: "Password",
       passwordPlaceholder: "••••••••",
       confirmPassword: "Confirm Password",
@@ -296,12 +292,8 @@ export const en = {
       backToLogin: "Back to Sign in",
       errors: {
         notFound: "No user found with this email.",
-        invalidEmail: "Invalid email format. Please check if you typed it correctly.",
-        tooManyRequests: "Too many attempts. Please wait a few minutes before trying again.",
         generic: "An error occurred. Please try again.",
       },
-      noAccount: "Don't have an account?",
-      createAccount: "Create account",
     },
   },
 }; 

@@ -11,7 +11,6 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail as firebaseSendPasswordResetEmail,
-  updateProfile,
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { useRouter } from "next/navigation";
@@ -33,7 +32,7 @@ const auth = getAuth(app);
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  signUp: (email: string, password: string, fullName: string, phone: string) => Promise<void>;
+  signUp: (email: string, password: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
@@ -62,21 +61,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string, fullName: string, phone: string) => {
+  const signUp = async (email: string, password: string) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      
-      // Update user profile with additional information
-      await updateProfile(userCredential.user, {
-        displayName: fullName,
-        // Note: phone number would need to be stored in Firestore or similar
-        // as Firebase Auth doesn't support phone in profile
-      });
-      
       const token = await userCredential.user.getIdToken();
       Cookies.set("auth-token", token, { expires: 7 });
     } catch (error) {
