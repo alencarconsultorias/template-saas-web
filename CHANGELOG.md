@@ -27,10 +27,11 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ---
 
-## [1.1.0] - DD-MM-YY
+## [1.0.1] - DD-MM-YY
 
 ### Alterado: 
-- [TSAAS-118]Adicionado campos para cadastro do usuario como Nome Completo e Telefone;    
+- [TSAAS-118] Adicionado campos para cadastro do usuario como Nome Completo e Telefone;    
+- [TSAAS-122] Atualizado o desing da tela de recuperacao de senha e tratativa de erros; 
 
 ---
 
