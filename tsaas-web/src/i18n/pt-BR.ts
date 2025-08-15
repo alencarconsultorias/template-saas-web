@@ -263,8 +263,12 @@ export const ptBR = {
     register: {
       title: "Junte-se à Nossa Plataforma",
       subtitle: "Crie sua conta para começar.",
+      fullName: "Nome Completo",
+      fullNamePlaceholder: "Digite seu nome completo",
       email: "Endereço de E-mail",
       emailPlaceholder: "seu@email.com",
+      phone: "Telefone",
+      phonePlaceholder: "Digite seu telefone",
       password: "Senha",
       passwordPlaceholder: "••••••••",
       confirmPassword: "Confirmar Senha",
@@ -292,8 +296,12 @@ export const ptBR = {
       backToLogin: "Voltar para o login",
       errors: {
         notFound: "Nenhum usuário encontrado com este e-mail.",
+        invalidEmail: "Formato de e-mail inválido. Verifique se digitou corretamente.",
+        tooManyRequests: "Muitas tentativas. Aguarde alguns minutos antes de tentar novamente.",
         generic: "Ocorreu um erro. Tente novamente.",
       },
+      noAccount: "Não tem uma conta?",
+      createAccount: "Criar conta",
     },
   },
 }; 
