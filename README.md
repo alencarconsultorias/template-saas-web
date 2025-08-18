@@ -6,6 +6,7 @@ Para executar o projeto independente do ambiente:
 # para rodar em dev
 cd /tsaas-web
 npm run dev 
+
 # para rodar em prod
 cd /tsaas-web
 npm run build
