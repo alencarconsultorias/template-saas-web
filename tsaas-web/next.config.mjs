@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   // output: 'export', // Configuração para Amplify
-  // output: 'standalone', // Configuração para Docker
+  output: 'standalone', // Configuração para Docker
   images: { unoptimized: true },
   webpack(config) {
     // Importa a configuração padrão de regra de módulo de arquivos
