@@ -11,6 +11,8 @@ export default function ProfilePage() {
     name: "",
     birthDate: "",
     email: "",
+    company: "",
+    phone: "",
     bio: ""
   });
   const [saving, setSaving] = useState(false);
@@ -107,6 +109,53 @@ export default function ProfilePage() {
               required
             />
           </div>
+        </div>
+
+        {/* Nome da Empresa */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t("profile.personalInfo.company")}</label>
+          <input
+            type="text"
+            className="w-full px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:border-gold-500"
+            value={formData.company}
+            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+            placeholder={t("profile.personalInfo.companyPlaceholder")}
+          />
+        </div>
+
+        {/* Telefone */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t("profile.personalInfo.phone")}</label>
+          <input
+            type="tel"
+            className="w-full px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:border-gold-500"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            placeholder="(11) 99999-9999"
+          />
+        </div>
+
+        {/* Data de Aniversário */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t("profile.personalInfo.birthDate")}</label>
+          <input
+            type="date"
+            className="w-full px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:border-gold-500"
+            value={formData.birthDate}
+            onChange={(e) => setFormData({ ...formData, birthDate: e.target.value })}
+          />
+        </div>
+
+        {/* Biografia */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t("profile.personalInfo.bio")}</label>
+          <textarea
+            rows={4}
+            className="w-full px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:border-gold-500 resize-none"
+            value={formData.bio}
+            onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
+            placeholder={t("profile.personalInfo.bioPlaceholder")}
+          />
         </div>
 
         <div className="flex justify-end">
