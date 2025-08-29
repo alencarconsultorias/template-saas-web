@@ -24,15 +24,38 @@ export default function ProfilePage() {
   const [successMessage, setSuccessMessage] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setProfileImage(file.name);
+    if (!file || !user) return;
+
+    try {
+      setErrors({ ...errors, avatar: "" });
+      
+      // Preview da imagem
       const reader = new FileReader();
       reader.onloadend = () => {
         setProfileImage(reader.result as string);
       };
       reader.readAsDataURL(file);
+
+      // Upload para Firebase Storage
+      const { StorageService } = await import("@/services/storageService");
+      
+      // Redimensionar imagem se necessário
+      const resizedFile = await StorageService.resizeImage(file, 400, 400, 0.8);
+      
+      // Upload
+      const result = await StorageService.uploadAvatar(resizedFile, user.uid);
+      
+      // Atualizar perfil do usuário
+      await StorageService.updateUserAvatar(result.url);
+      
+      setSuccessMessage("Avatar atualizado com sucesso!");
+      setTimeout(() => setSuccessMessage(""), 3000);
+      
+    } catch (error: any) {
+      setErrors({ ...errors, avatar: error.message });
+      setProfileImage(null);
     }
   };
 
@@ -56,6 +79,13 @@ export default function ProfilePage() {
       <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">{t("profile.title")}</h1>
       <p className="text-gray-600 dark:text-gray-400 mb-8">{t("profile.description")}</p>
 
+      {/* Mensagem de sucesso */}
+      {successMessage && (
+        <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-green-700 dark:text-green-300">
+          {successMessage}
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-900 rounded-lg shadow-md border border-gray-200 dark:border-gray-800 p-6 space-y-8">
         {/* Foto de perfil */}
         <div className="flex items-center gap-6">
@@ -65,16 +95,18 @@ export default function ProfilePage() {
               onClick={handlePhotoClick}
               title={t("profile.photo.title")}
             >
-              {profileImage ? (
+              {profileImage || user?.photoURL ? (
                 <Image
-                  src={profileImage}
+                  src={profileImage || user?.photoURL || ""}
                   alt={t("profile.photo.alt")}
                   fill
                   className="object-cover w-full h-full"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-gray-400">
-                  {t("profile.photo.noPhoto")}
+                <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">
+                  <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                  </svg>
                 </div>
               )}
             </div>
@@ -87,9 +119,12 @@ export default function ProfilePage() {
             />
           </div>
           <div>
-            <div className="font-semibold text-gray-900 dark:text-gray-100 text-lg">{formData.name}</div>
+            <div className="font-semibold text-gray-900 dark:text-gray-100 text-lg">{formData.name || user?.displayName || "Nome do usuário"}</div>
             <div className="text-gray-600 dark:text-gray-400 text-sm">{formData.email}</div>
-            <div className="text-xs text-gray-400 mt-1">{t("profile.photo.click")}</div>
+            <div className="text-xs text-gray-400 mt-1">Clique na foto para alterar</div>
+            {errors.avatar && (
+              <div className="text-xs text-red-500 mt-1">{errors.avatar}</div>
+            )}
           </div>
         </div>
 
