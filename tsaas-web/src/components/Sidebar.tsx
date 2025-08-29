@@ -12,12 +12,9 @@ import {
   FolderIcon,
   HomeIcon,
   DocumentReportIcon,
-  CogIcon,
   MenuIcon,
   XIcon,
   UserGroupIcon,
-  CreditCardIcon,
-  SupportIcon,
 } from "@heroicons/react/outline";
 
 const navigation = [
@@ -26,9 +23,6 @@ const navigation = [
   { name: "common.analytics", href: "/dashboard/analytics", icon: ChartBarIcon },
   { name: "common.reports", href: "/dashboard/reports", icon: DocumentReportIcon },
   { name: "common.team", href: "/dashboard/team", icon: UserGroupIcon },
-  { name: "common.billing", href: "/dashboard/billing", icon: CreditCardIcon },
-  { name: "common.support", href: "/dashboard/support", icon: SupportIcon },
-  { name: "common.settings", href: "/dashboard/settings", icon: CogIcon },
 ];
 
 export default function Sidebar() {

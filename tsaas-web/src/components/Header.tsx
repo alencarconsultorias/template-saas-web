@@ -92,23 +92,6 @@ export default function Header() {
           )}
         </button>
 
-        <Link href="/dashboard/support">
-          <button className="p-2 rounded-lg bg-gold-500 dark:bg-gold-600 text-white hover:bg-gold-600 dark:hover:bg-gold-700 transition-colors">
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </button>
-        </Link>
         <div className="relative">
           <button
             onClick={() => setShowProfileMenu(!showProfileMenu)}
@@ -131,7 +114,65 @@ export default function Header() {
           {showProfileMenu && (
             <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg py-2 z-10 border border-gray-200 dark:border-gray-700">
               <Link 
-                href="/settings"
+                href="/dashboard/profile"
+                className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-50 dark:hover:bg-gold-600 hover:text-gold-700 dark:hover:text-white transition-colors"
+              >
+                <svg
+                  className="h-5 w-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+                {t("header.myProfile")}
+              </Link>
+              <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
+              <Link 
+                href="/dashboard/billing"
+                className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-50 dark:hover:bg-gold-600 hover:text-gold-700 dark:hover:text-white transition-colors"
+              >
+                <svg
+                  className="h-5 w-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                  />
+                </svg>
+                {t("common.billing")}
+              </Link>
+              <Link 
+                href="/dashboard/support"
+                className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-50 dark:hover:bg-gold-600 hover:text-gold-700 dark:hover:text-white transition-colors"
+              >
+                <svg
+                  className="h-5 w-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                {t("common.support")}
+              </Link>
+              <Link 
+                href="/dashboard/settings"
                 className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-50 dark:hover:bg-gold-600 hover:text-gold-700 dark:hover:text-white transition-colors"
               >
                 <svg
@@ -153,27 +194,9 @@ export default function Header() {
                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                   />
                 </svg>
-                {t("header.settings")}
+                {t("common.settings")}
               </Link>
-              <Link 
-                href="/dashboard/profile"
-                className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-50 dark:hover:bg-gold-600 hover:text-gold-700 dark:hover:text-white transition-colors"
-              >
-                <svg
-                  className="h-5 w-5 mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
-                {t("header.myProfile")}
-              </Link>
+              <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
               <button
                 onClick={handleLogout}
                 className="flex items-center w-full px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-50 dark:hover:bg-gold-600 hover:text-gold-700 dark:hover:text-white transition-colors"
@@ -199,4 +222,4 @@ export default function Header() {
       </div>
     </header>
   );
-} 
+}
