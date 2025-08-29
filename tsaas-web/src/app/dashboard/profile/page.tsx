@@ -2,20 +2,26 @@
 
 import { useRef, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
 import Image from "next/image";
 
 export default function ProfilePage() {
   const { t } = useLanguage();
+  const { user } = useAuth();
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [formData, setFormData] = useState({
-    name: "",
+    name: user?.displayName || "",
     birthDate: "",
-    email: "",
+    email: user?.email || "",
     company: "",
     phone: "",
-    bio: ""
+    bio: "",
+    location: "",
+    website: ""
   });
   const [saving, setSaving] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [successMessage, setSuccessMessage] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
