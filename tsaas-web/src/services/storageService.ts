@@ -1,7 +1,20 @@
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { getAuth, updateProfile } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
 
-const storage = getStorage();
+// Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyAMNsySnPJcfz2x97D8hlfkuOf9MXOI8W8",
+  authDomain: "tsaas-bb773.firebaseapp.com",
+  projectId: "tsaas-bb773",
+  storageBucket: "tsaas-bb773.firebasestorage.app",
+  messagingSenderId: "1024004216445",
+  appId: "1:1024004216445:web:3c9618456e32433ffc0314",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
 
 export interface UploadResult {
   url: string;
