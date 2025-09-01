@@ -135,9 +135,17 @@ export default function Sidebar() {
                 exit={{ opacity: 0 }}
                 className="flex items-center"
               >
-                <div className="w-7 h-7 rounded-full bg-gold-100 dark:bg-gold-500/20 flex items-center justify-center flex-shrink-0">
-                  <UserGroupIcon className="w-3 h-3 text-gold-600 dark:text-gold-500" />
-                </div>
+                {user?.photoURL ? (
+                  <img 
+                    src={user.photoURL} 
+                    alt="Profile" 
+                    className="w-7 h-7 rounded-full object-cover flex-shrink-0 border border-gold-500"
+                  />
+                ) : (
+                  <div className="w-7 h-7 rounded-full bg-gold-100 dark:bg-gold-500/20 flex items-center justify-center flex-shrink-0">
+                    <UserGroupIcon className="w-3 h-3 text-gold-600 dark:text-gold-500" />
+                  </div>
+                )}
                 <div className="ml-3 min-w-0 flex-1">
                   <p className="text-sm font-medium text-gray-900 dark:text-gray-300 truncate">{user?.displayName || user?.email || "Usuário"}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{user?.email || ""}</p>
