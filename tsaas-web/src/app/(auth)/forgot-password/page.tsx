@@ -51,7 +51,7 @@ export default function ForgotPasswordPage() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="w-full max-w-md space-y-8 bg-white p-8 rounded-xl shadow-xl"
+      className="w-full max-w-md space-y-8 bg-white dark:bg-gray-900 p-8 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700"
     >
       {/* Logo */}
       <div className="flex justify-center mb-8">
@@ -59,14 +59,14 @@ export default function ForgotPasswordPage() {
       </div>
 
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-primary">{t("auth.forgotPassword.title")}</h2>
-        <p className="mt-2 text-gray-500">{t("auth.forgotPassword.subtitle")}</p>
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{t("auth.forgotPassword.title")}</h2>
+        <p className="mt-2 text-gray-600 dark:text-gray-400">{t("auth.forgotPassword.subtitle")}</p>
       </div>
 
       {!isSubmitted ? (
         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
           <div>
-            <label htmlFor="email" className="text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {t("auth.login.email")}
             </label>
             <input
@@ -79,8 +79,8 @@ export default function ForgotPasswordPage() {
               })}
               type="email"
               required
-              className={`mt-1 block w-full px-3 py-2 bg-gray-50 border rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
-                errors.email ? 'border-red-300 focus:ring-red-500' : 'border-gray-300'
+              className={`mt-1 block w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-md text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold-600 focus:border-transparent transition-colors ${
+                errors.email ? 'border-red-300 focus:ring-red-500' : ''
               }`}
               placeholder={t("auth.login.emailPlaceholder")}
             />
@@ -92,17 +92,17 @@ export default function ForgotPasswordPage() {
           </div>
 
           {error && (
-            <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+            <div className="mb-4 p-4 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-lg text-red-700 dark:text-red-400 text-sm">
               <div className="text-center mb-3">
-                <svg className="w-5 h-5 mx-auto mb-2 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 mx-auto mb-2 text-red-500 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" />
                 </svg>
                 <p className="font-medium">{error}</p>
               </div>
               
               {errorType === "notFound" && (
-                <div className="text-center pt-2 border-t border-red-200">
-                  <p className="text-red-600 text-xs mb-2">{t("auth.forgotPassword.noAccount")}</p>
+                <div className="text-center pt-2 border-t border-red-200 dark:border-red-500/20">
+                  <p className="text-red-600 dark:text-red-400 text-xs mb-2">{t("auth.forgotPassword.noAccount")}</p>
                   <Link 
                     href="/register" 
                     className="inline-flex items-center text-xs text-gold-600 hover:text-gold-700 font-medium transition-colors"
@@ -124,7 +124,7 @@ export default function ForgotPasswordPage() {
             {t("auth.forgotPassword.submit")}
           </button>
 
-          <p className="text-center text-sm text-gray-500">
+          <p className="text-center text-sm text-gray-600 dark:text-gray-400">
             <Link href="/login" className="text-gold-600 hover:text-gold-500 transition-colors">
               {t("auth.forgotPassword.backToLogin")}
             </Link>
@@ -152,7 +152,7 @@ export default function ForgotPasswordPage() {
             </svg>
           </div>
           <h3 className="text-xl font-semibold text-gold-600">{t("auth.forgotPassword.successTitle")}</h3>
-          <p className="text-gray-500">
+          <p className="text-gray-600 dark:text-gray-400">
             {t("auth.forgotPassword.successMessage")}
           </p>
           <Link
