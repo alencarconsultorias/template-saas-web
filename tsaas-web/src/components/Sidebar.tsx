@@ -53,13 +53,13 @@ export default function Sidebar() {
           width: isCollapsed ? 64 : 256
         }}
         transition={{ duration: 0.3 }}
-        className={`fixed bottom-0 left-0 z-40 bg-white dark:bg-gray-900 transform lg:translate-x-0 lg:static lg:inset-0 ${
+        className={`fixed top-0 left-0 z-40 bg-white dark:bg-gray-900 transform lg:translate-x-0 lg:static lg:inset-0 ${
           isCollapsed ? 'w-16' : 'w-64'
-        } h-[calc(100vh-2rem)] mt-4 mb-2 lg:mt-2 lg:mb-2 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700`}
+        } h-[calc(100vh-12rem)] lg:h-[calc(100vh-6rem)] mt-0 mb-0 lg:mt-2 lg:mb-2 lg:rounded-lg shadow-lg border border-gray-200 dark:border-gray-700`}
       >
-        <div className="flex flex-col h-full max-h-full">
+        <div className="flex flex-col h-full min-h-0">
           {/* Header - Altura fixa */}
-          <div className="flex items-center justify-center h-14 px-4 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 flex-shrink-0 rounded-t-lg">
+          <div className="flex items-center justify-center h-12 px-4 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 flex-shrink-0 lg:rounded-t-lg">
             {!isCollapsed && (
               <motion.h1 
                 initial={{ opacity: 0 }}
@@ -81,8 +81,8 @@ export default function Sidebar() {
             )}
           </div>
 
-          {/* Navigation - Altura flexível com scroll */}
-          <nav className="flex-1 px-3 py-3 overflow-y-auto min-h-0">
+          {/* Navigation - Área flexível com scroll */}
+          <nav className="flex-1 px-3 py-2 overflow-y-auto min-h-0">
             <div className="space-y-1">
               {navigation.map((item) => {
                 const isActive = pathname === item.href;
@@ -126,8 +126,8 @@ export default function Sidebar() {
             </div>
           </nav>
 
-          {/* User profile section - Altura fixa */}
-          <div className="p-3 border-t border-gray-200 dark:border-gray-700 flex-shrink-0 rounded-b-lg">
+          {/* User profile section - Sempre visível */}
+          <div className="px-3 py-2 border-t border-gray-200 dark:border-gray-700 flex-shrink-0 lg:rounded-b-lg bg-white dark:bg-gray-900">
             {!isCollapsed ? (
               <motion.div 
                 initial={{ opacity: 0 }}
@@ -138,9 +138,9 @@ export default function Sidebar() {
                 <div className="w-7 h-7 rounded-full bg-gold-100 dark:bg-gold-500/20 flex items-center justify-center flex-shrink-0">
                   <UserGroupIcon className="w-3 h-3 text-gold-600 dark:text-gold-500" />
                 </div>
-                <div className="ml-3 min-w-0">
-                  <p className="text-xs font-medium text-gray-900 dark:text-gray-300 truncate">{user?.displayName || user?.email || "Usuário"}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-500 truncate">{user?.email || ""}</p>
+                <div className="ml-3 min-w-0 flex-1">
+                  <p className="text-sm font-medium text-gray-900 dark:text-gray-300 truncate">{user?.displayName || user?.email || "Usuário"}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{user?.email || ""}</p>
                 </div>
               </motion.div>
             ) : (
