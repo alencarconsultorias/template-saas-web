@@ -38,22 +38,31 @@ export default function ProfilePage() {
       };
       reader.readAsDataURL(file);
 
+      console.log("Iniciando upload da imagem...", { fileName: file.name, fileSize: file.size, userId: user.uid });
+
       // Upload para Firebase Storage
       const { StorageService } = await import("@/services/storageService");
       
       // Redimensionar imagem se necessário
+      console.log("Redimensionando imagem...");
       const resizedFile = await StorageService.resizeImage(file, 400, 400, 0.8);
+      console.log("Imagem redimensionada:", { originalSize: file.size, newSize: resizedFile.size });
       
       // Upload
+      console.log("Fazendo upload para Firebase Storage...");
       const result = await StorageService.uploadAvatar(resizedFile, user.uid);
+      console.log("Upload concluído:", result);
       
       // Atualizar perfil do usuário
+      console.log("Atualizando perfil do usuário...");
       await StorageService.updateUserAvatar(result.url);
+      console.log("Perfil atualizado com sucesso!");
       
       setSuccessMessage("Avatar atualizado com sucesso!");
       setTimeout(() => setSuccessMessage(""), 3000);
       
     } catch (error: any) {
+      console.error("Erro no upload da imagem:", error);
       setErrors({ ...errors, avatar: error.message });
       setProfileImage(null);
     }
