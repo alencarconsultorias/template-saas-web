@@ -3,12 +3,15 @@
 import { useState } from "react";
 import { useSessions } from "@/contexts/SessionsContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function SessionsPage() {
   const { sessions, loading, terminateSession, terminateAllOtherSessions, refreshSessions } = useSessions();
   const { t } = useLanguage();
+  const { logout } = useAuth();
   const [terminating, setTerminating] = useState<string | null>(null);
   const [terminatingAll, setTerminatingAll] = useState(false);
+  const [terminatingCurrent, setTerminatingCurrent] = useState(false);
 
   const handleTerminateSession = async (sessionId: string) => {
     setTerminating(sessionId);
@@ -29,6 +32,21 @@ export default function SessionsPage() {
       console.error('Error terminating all sessions:', error);
     } finally {
       setTerminatingAll(false);
+    }
+  };
+
+  const handleTerminateCurrentSession = async () => {
+    setTerminatingCurrent(true);
+    try {
+      // Clear session data and logout
+      localStorage.removeItem('current-session-id');
+      localStorage.removeItem('session-created-at');
+      localStorage.removeItem('user-sessions');
+      await logout();
+    } catch (error) {
+      console.error('Error terminating current session:', error);
+    } finally {
+      setTerminatingCurrent(false);
     }
   };
 
@@ -116,6 +134,13 @@ export default function SessionsPage() {
           >
             Atualizar
           </button>
+          <button
+            onClick={handleTerminateCurrentSession}
+            disabled={terminatingCurrent}
+            className="px-4 py-2 text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 disabled:bg-orange-400 rounded-md transition-colors"
+          >
+            {terminatingCurrent ? 'Encerrando...' : 'Encerrar Sessão Atual'}
+          </button>
           {sessions.filter(s => !s.isCurrent).length > 0 && (
             <button
               onClick={handleTerminateAllOther}
@@ -171,7 +196,15 @@ export default function SessionsPage() {
                 </div>
               </div>
               
-              {!session.isCurrent && (
+              {session.isCurrent ? (
+                <button
+                  onClick={handleTerminateCurrentSession}
+                  disabled={terminatingCurrent}
+                  className="px-3 py-2 text-sm font-medium text-orange-600 dark:text-orange-400 hover:text-orange-800 dark:hover:text-orange-300 hover:bg-orange-50 dark:hover:bg-orange-500/10 rounded-md transition-colors disabled:opacity-50"
+                >
+                  {terminatingCurrent ? 'Encerrando...' : 'Encerrar Sessão'}
+                </button>
+              ) : (
                 <button
                   onClick={() => handleTerminateSession(session.id)}
                   disabled={terminating === session.id}
