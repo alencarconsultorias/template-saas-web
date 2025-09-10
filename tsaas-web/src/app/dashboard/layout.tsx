@@ -2,13 +2,14 @@
 
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
+import DevBanner from "@/components/DevBanner";
 import { SidebarProvider, useSidebar } from "@/contexts/SidebarContext";
 
 function DashboardContent({ children }: { children: React.ReactNode }) {
   const { isCollapsed } = useSidebar();
   
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col pt-16">
       <Header />
       <div className="flex flex-1 h-[calc(100vh-64px)] px-4 lg:px-2">
         <Sidebar />
@@ -18,6 +19,7 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
+      <DevBanner />
     </div>
   );
 }
