@@ -15,6 +15,7 @@ import {
   MenuIcon,
   XIcon,
   UserGroupIcon,
+  DesktopComputerIcon,
 } from "@heroicons/react/outline";
 
 const navigation = [

@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { SessionsProvider } from "@/contexts/SessionsContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,9 @@ export default function RootLayout({
         <AuthProvider>
           <LanguageProvider>
             <ThemeProvider>
-              {children}
+              <SessionsProvider>
+                {children}
+              </SessionsProvider>
             </ThemeProvider>
           </LanguageProvider>
         </AuthProvider>

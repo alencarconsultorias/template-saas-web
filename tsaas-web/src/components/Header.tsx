@@ -172,6 +172,25 @@ export default function Header() {
                 {t("common.support")}
               </Link>
               <Link 
+                href="/dashboard/sessions"
+                className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-50 dark:hover:bg-gold-600 hover:text-gold-700 dark:hover:text-white transition-colors"
+              >
+                <svg
+                  className="h-5 w-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+                {t("header.sessions")}
+              </Link>
+              <Link 
                 href="/dashboard/settings"
                 className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-50 dark:hover:bg-gold-600 hover:text-gold-700 dark:hover:text-white transition-colors"
               >
