@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useSidebar } from "@/contexts/SidebarContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { MenuIcon } from "@heroicons/react/outline";
+import DevBanner from "./DevBanner";
 
 export default function Header() {
   const [search, setSearch] = useState("");
@@ -76,6 +77,9 @@ export default function Header() {
 
       {/* Botões à direita */}
       <div className="flex items-center gap-4">
+        {/* Dev Banner */}
+        <DevBanner />
+        
         {/* Theme toggle button */}
         <button
           onClick={toggleTheme}

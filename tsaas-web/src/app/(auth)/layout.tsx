@@ -1,5 +1,3 @@
-import DevBanner from "@/components/DevBanner";
-
 export default function AuthLayout({
   children,
 }: {
@@ -8,7 +6,6 @@ export default function AuthLayout({
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
       {children}
-      <DevBanner />
     </div>
   );
 }

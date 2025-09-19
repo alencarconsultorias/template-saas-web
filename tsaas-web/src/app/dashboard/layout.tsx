@@ -2,7 +2,6 @@
 
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import DevBanner from "@/components/DevBanner";
 import { SidebarProvider, useSidebar } from "@/contexts/SidebarContext";
 
 function DashboardContent({ children }: { children: React.ReactNode }) {
@@ -19,7 +18,6 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
-      <DevBanner />
     </div>
   );
 }
