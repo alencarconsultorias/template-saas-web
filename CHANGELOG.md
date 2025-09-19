@@ -14,6 +14,9 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 - [TSAAS-122] Atualizado o desing da tela de recuperacao de senha e tratativa de erros;
 - [TSAAS-135] Adicionado os campos do perfil do usuario como: Nome da empresa, Telefone, Data de Nascimento e biografia.   
 
+## Sergunça: 
+- [TSAAS-208] Atualizado as variaveis de ambiente do Amplify e Firebase para respeitar o ambiente de desenvolvimento e produção
+
 ---
 
 ## [1.0.0] - 2025-07-09
