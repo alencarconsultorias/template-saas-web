@@ -223,6 +223,7 @@ export const ptBR = {
     profile: "Perfil",
     settings: "Configurações",
     myProfile: "Meu Perfil",
+    sessions: "Sessões Ativas",
     logout: "Sair",
   },
   profile: {
