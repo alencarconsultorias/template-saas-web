@@ -1,3 +1,5 @@
+import Header from "@/components/Header";
+
 export default function SiteLayout({
   children,
 }: {
@@ -5,6 +7,7 @@ export default function SiteLayout({
 }) {
   return (
     <div className="min-h-screen bg-secondary-dark text-gray-100">
+      <Header />
       {children}
     </div>
   );

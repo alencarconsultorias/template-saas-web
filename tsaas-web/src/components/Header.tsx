@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useSidebar } from "@/contexts/SidebarContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { MenuIcon } from "@heroicons/react/outline";
+import DevBanner from "./DevBanner";
 
 export default function Header() {
   const [search, setSearch] = useState("");
@@ -33,7 +34,7 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full bg-white dark:bg-gray-900 shadow-md px-6 py-3 flex items-center justify-between h-16 flex-shrink-0 border-b border-gray-200 dark:border-gray-700">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full bg-white dark:bg-gray-900 shadow-md px-6 py-3 flex items-center justify-between h-16 flex-shrink-0 border-b border-gray-200 dark:border-gray-700">
       {/* Left section with sidebar toggle and logo */}
       <div className="flex items-center gap-4">
         {/* Sidebar toggle button (desktop only) */}
@@ -76,6 +77,9 @@ export default function Header() {
 
       {/* Botões à direita */}
       <div className="flex items-center gap-4">
+        {/* Dev Banner */}
+        <DevBanner />
+        
         {/* Theme toggle button */}
         <button
           onClick={toggleTheme}
