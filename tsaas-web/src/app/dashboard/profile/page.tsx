@@ -9,7 +9,7 @@ import Image from "next/image";
 export default function ProfilePage() {
   const { t } = useLanguage();
   const { user } = useAuth();
-  const { companyLogo, updateCompanyLogo, logoError, isLoadingLogo } = useCompany();
+  const { companyLogo, uploadCompanyLogo, logoError, isLoadingLogo } = useCompany();
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [companyLogoPreview, setCompanyLogoPreview] = useState<string | null>(null);
   const [formData, setFormData] = useState({
@@ -90,35 +90,27 @@ export default function ProfilePage() {
     try {
       setErrors({ ...errors, companyLogo: "" });
       
-      // Validar arquivo
-      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/svg+xml'];
-      if (!allowedTypes.includes(file.type)) {
-        throw new Error('Formato não suportado. Use JPEG, PNG ou SVG.');
-      }
-      
-      const maxSize = 2 * 1024 * 1024; // 2MB
-      if (file.size > maxSize) {
-        throw new Error('Arquivo muito grande. Máximo 2MB.');
-      }
-      
-      // Converter para base64 e usar como logotipo
+      // Preview local imediato
       const reader = new FileReader();
       reader.onloadend = () => {
-        const result = reader.result as string;
-        setCompanyLogoPreview(result);
-        
-        // Usar o preview como logotipo (armazenado no localStorage)
-        updateCompanyLogo(result);
-        
-        setSuccessMessage("Logotipo da empresa atualizado com sucesso!");
-        setTimeout(() => setSuccessMessage(""), 3000);
+        setCompanyLogoPreview(reader.result as string);
       };
       reader.readAsDataURL(file);
 
-      console.log("Processando logotipo da empresa...", { fileName: file.name, fileSize: file.size });
+      console.log("Iniciando upload para Firebase Storage...", { 
+        fileName: file.name, 
+        fileSize: file.size,
+        fileType: file.type 
+      });
+      
+      // Upload para Firebase Storage via contexto
+      await uploadCompanyLogo(file);
+      
+      setSuccessMessage("Logotipo da empresa atualizado com sucesso!");
+      setTimeout(() => setSuccessMessage(""), 3000);
       
     } catch (error: any) {
-      console.error("Erro no processamento do logotipo:", error);
+      console.error("Erro no upload do logotipo:", error);
       setErrors({ ...errors, companyLogo: error.message });
       setCompanyLogoPreview(null);
     }

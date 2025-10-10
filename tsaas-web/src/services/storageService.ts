@@ -20,22 +20,57 @@ export class StorageService {
       
       // Criar referência única para o logotipo da empresa
       const timestamp = Date.now();
-      const fileName = `company_logo_${timestamp}.${file.name.split('.').pop()}`;
+      const fileExtension = file.name.split('.').pop()?.toLowerCase() || 'png';
+      const fileName = `company_logo_${timestamp}.${fileExtension}`;
       const logoRef = ref(storage, `company_logos/${userId}/${fileName}`);
       
-      // Upload do arquivo
-      const snapshot = await uploadBytes(logoRef, file);
+      console.log('Iniciando upload para Firebase Storage...', {
+        fileName,
+        fileSize: file.size,
+        fileType: file.type,
+        path: `company_logos/${userId}/${fileName}`
+      });
+      
+      // Configurar metadata do arquivo
+      const metadata = {
+        contentType: file.type,
+        customMetadata: {
+          uploadedBy: userId,
+          uploadedAt: new Date().toISOString(),
+          originalName: file.name
+        }
+      };
+      
+      // Upload do arquivo com metadata
+      const snapshot = await uploadBytes(logoRef, file, metadata);
+      console.log('Upload concluído:', snapshot);
       
       // Obter URL de download
       const downloadURL = await getDownloadURL(snapshot.ref);
+      console.log('URL de download obtida:', downloadURL);
       
       return {
         url: downloadURL,
         path: snapshot.ref.fullPath
       };
-    } catch (error) {
-      console.error('Erro no upload do logotipo:', error);
-      throw new Error('Falha no upload do logotipo. Tente novamente.');
+    } catch (error: any) {
+      console.error('Erro detalhado no upload do logotipo:', {
+        error,
+        message: error.message,
+        code: error.code,
+        stack: error.stack
+      });
+      
+      // Mensagens de erro mais específicas
+      if (error.code === 'storage/unauthorized') {
+        throw new Error('Sem permissão para fazer upload. Verifique as regras do Firebase.');
+      } else if (error.code === 'storage/canceled') {
+        throw new Error('Upload cancelado.');
+      } else if (error.code === 'storage/unknown') {
+        throw new Error('Erro desconhecido no Firebase Storage.');
+      } else {
+        throw new Error(`Falha no upload: ${error.message}`);
+      }
     }
   }
 
