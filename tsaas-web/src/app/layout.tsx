@@ -5,6 +5,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { SessionsProvider } from "@/contexts/SessionsContext";
+import { CompanyProvider } from "@/contexts/CompanyContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +26,9 @@ export default function RootLayout({
           <LanguageProvider>
             <ThemeProvider>
               <SessionsProvider>
-                {children}
+                <CompanyProvider>
+                  {children}
+                </CompanyProvider>
               </SessionsProvider>
             </ThemeProvider>
           </LanguageProvider>

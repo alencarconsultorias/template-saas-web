@@ -6,6 +6,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSidebar } from "@/contexts/SidebarContext";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useCompany } from "@/contexts/CompanyContext";
+import Image from "next/image";
 import { MenuIcon } from "@heroicons/react/outline";
 import DevBanner from "./DevBanner";
 
@@ -17,6 +19,7 @@ export default function Header() {
   const { logout } = useAuth();
   const { toggleSidebar } = useSidebar();
   const { theme, toggleTheme } = useTheme();
+  const { companyLogo, logoError } = useCompany();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,7 +49,21 @@ export default function Header() {
         </button>
         
         {/* Logo ou nome do sistema */}
-        <div className="text-xl font-bold text-gray-900 dark:text-gold-600">{t("app.name")}</div>
+        <div className="flex items-center">
+          {companyLogo && !logoError ? (
+            <div className="relative w-32 h-8 mr-2">
+              <Image
+                src={companyLogo}
+                alt="Company Logo"
+                fill
+                className="object-contain"
+                onError={() => console.log("Erro ao carregar logotipo")}
+              />
+            </div>
+          ) : (
+            <div className="text-xl font-bold text-gray-900 dark:text-gold-600">{t("app.name")}</div>
+          )}
+        </div>
       </div>
 
       {/* Barra de pesquisa */}

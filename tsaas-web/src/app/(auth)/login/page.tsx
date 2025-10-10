@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import CompanyLogo from "@/components/CompanyLogo";
 import LogoLogin from "@/images/logo_login.svg";
 
 export default function LoginPage() {

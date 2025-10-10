@@ -11,6 +11,48 @@ export interface UploadResult {
 
 export class StorageService {
   /**
+   * Upload de logotipo da empresa
+   */
+  static async uploadCompanyLogo(file: File, userId: string): Promise<UploadResult> {
+    try {
+      // Validação específica para logotipo
+      this.validateLogoFile(file);
+      
+      // Criar referência única para o logotipo da empresa
+      const timestamp = Date.now();
+      const fileName = `company_logo_${timestamp}.${file.name.split('.').pop()}`;
+      const logoRef = ref(storage, `company_logos/${userId}/${fileName}`);
+      
+      // Upload do arquivo
+      const snapshot = await uploadBytes(logoRef, file);
+      
+      // Obter URL de download
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      
+      return {
+        url: downloadURL,
+        path: snapshot.ref.fullPath
+      };
+    } catch (error) {
+      console.error('Erro no upload do logotipo:', error);
+      throw new Error('Falha no upload do logotipo. Tente novamente.');
+    }
+  }
+
+  /**
+   * Deletar logotipo da empresa anterior
+   */
+  static async deleteCompanyLogo(logoPath: string): Promise<void> {
+    try {
+      const logoRef = ref(storage, logoPath);
+      await deleteObject(logoRef);
+    } catch (error) {
+      console.error('Erro ao deletar logotipo anterior:', error);
+      // Não lança erro pois não é crítico
+    }
+  }
+
+  /**
    * Upload de avatar do usuário
    */
   static async uploadAvatar(file: File, userId: string): Promise<UploadResult> {
@@ -70,6 +112,23 @@ export class StorageService {
     } catch (error) {
       console.error('Erro ao deletar avatar anterior:', error);
       // Não lança erro pois não é crítico
+    }
+  }
+
+  /**
+   * Validação do arquivo de logotipo da empresa
+   */
+  private static validateLogoFile(file: File): void {
+    // Verificar tipo de arquivo (inclui SVG para logotipos)
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/svg+xml'];
+    if (!allowedTypes.includes(file.type)) {
+      throw new Error('Formato de arquivo não suportado. Use JPEG, PNG ou SVG.');
+    }
+    
+    // Verificar tamanho (máximo 2MB para logotipos)
+    const maxSize = 2 * 1024 * 1024; // 2MB
+    if (file.size > maxSize) {
+      throw new Error('Arquivo muito grande. O tamanho máximo é 2MB.');
     }
   }
 
