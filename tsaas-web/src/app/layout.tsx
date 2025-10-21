@@ -5,6 +5,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { SessionsProvider } from "@/contexts/SessionsContext";
+import FaviconManager from "@/components/FaviconManager";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           <LanguageProvider>
             <ThemeProvider>
               <SessionsProvider>
+                <FaviconManager />
                 {children}
               </SessionsProvider>
             </ThemeProvider>
