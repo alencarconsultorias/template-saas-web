@@ -10,15 +10,16 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 ## [Unreleased] - YYY-MM-DD
 
 ### Adicionado: 
-- [TSAAS-207] Adicionado banner para ambiente de desenvolvimento no cabecalho do site no canto superior esquerdo. 
+- [TSAAS-207]: Adicionado banner para ambiente de desenvolvimento no cabecalho do site no canto superior esquerdo. 
+- [TSAAS-211]: Adicionado opcao para o usuario inserir o favicon da empresa
 
 ### Alterado: 
-- [TSAAS-118] Atualizado campos para cadastro do usuario como Nome Completo e Telefone;    
-- [TSAAS-122] Atualizado o desing da tela de recuperacao de senha e tratativa de erros;
-- [TSAAS-135] Atualizado os campos do perfil do usuario como: Nome da empresa, Telefone, Data de Nascimento e biografia.   
+- [TSAAS-118]: Atualizado campos para cadastro do usuario como Nome Completo e Telefone;    
+- [TSAAS-122]: Atualizado o desing da tela de recuperacao de senha e tratativa de erros;
+- [TSAAS-135]: Atualizado os campos do perfil do usuario como: Nome da empresa, Telefone, Data de Nascimento e biografia.   
 
 ### Sergunça: 
-- [TSAAS-208] Atualizado as variaveis de ambiente do Amplify e Firebase para respeitar o ambiente de desenvolvimento e produção. 
+- [TSAAS-208]: Atualizado as variaveis de ambiente do Amplify e Firebase para respeitar o ambiente de desenvolvimento e produção. 
 
 ---
 
