@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSidebar } from "@/contexts/SidebarContext";
@@ -14,12 +14,24 @@ import DevBanner from "./DevBanner";
 export default function Header() {
   const [search, setSearch] = useState("");
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [currentLogo, setCurrentLogo] = useState<string | null>(null);
   const router = useRouter();
   const { t } = useLanguage();
   const { logout } = useAuth();
   const { toggleSidebar } = useSidebar();
   const { theme, toggleTheme } = useTheme();
   const { companyLogo, logoError } = useCompany();
+
+  // Atualizar logo quando mudar no contexto
+  useEffect(() => {
+    console.log('🎨 Header: Logo atualizado no contexto:', companyLogo);
+    if (companyLogo) {
+      console.log('✅ Header: Aplicando novo logo:', companyLogo);
+      setCurrentLogo(companyLogo);
+    } else {
+      console.log('❌ Header: Logo é null, mantendo texto padrão');
+    }
+  }, [companyLogo]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,14 +62,18 @@ export default function Header() {
         
         {/* Logo ou nome do sistema */}
         <div className="flex items-center">
-          {companyLogo && !logoError ? (
+          {currentLogo && !logoError ? (
             <div className="relative w-32 h-8 mr-2">
               <Image
-                src={companyLogo}
+                src={currentLogo}
                 alt="Company Logo"
                 fill
                 className="object-contain"
-                onError={() => console.log("Erro ao carregar logotipo")}
+                onError={() => {
+                  console.log("Erro ao carregar logotipo");
+                  setCurrentLogo(null);
+                }}
+                key={currentLogo}
               />
             </div>
           ) : (
@@ -152,6 +168,25 @@ export default function Header() {
                   />
                 </svg>
                 {t("header.myProfile")}
+              </Link>
+              <Link 
+                href="/dashboard/company-settings"
+                className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gold-50 dark:hover:bg-gold-600 hover:text-gold-700 dark:hover:text-white transition-colors"
+              >
+                <svg
+                  className="h-5 w-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                  />
+                </svg>
+                Minha Empresa
               </Link>
               <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
               <Link 

@@ -5,10 +5,13 @@ import { useAuth } from "./AuthContext";
 
 interface CompanyContextType {
   companyLogo: string | null;
+  companyName: string | null;
+  companyCnpj: string | null;
   isLoadingLogo: boolean;
   logoError: string | null;
   updateCompanyLogo: (logoUrl: string) => void;
   uploadCompanyLogo: (file: File) => Promise<void>;
+  updateCompanyInfo: (name: string, cnpj: string) => void;
   clearLogo: () => void;
 }
 
@@ -20,23 +23,34 @@ interface CompanyProviderProps {
 
 export function CompanyProvider({ children }: CompanyProviderProps) {
   const [companyLogo, setCompanyLogo] = useState<string | null>(null);
+  const [companyName, setCompanyName] = useState<string | null>(null);
+  const [companyCnpj, setCompanyCnpj] = useState<string | null>(null);
   const [isLoadingLogo, setIsLoadingLogo] = useState(false);
   const [logoError, setLogoError] = useState<string | null>(null);
   const { user } = useAuth();
 
-  // Carregar logotipo salvo ao inicializar
+  // Carregar dados salvos ao inicializar
   useEffect(() => {
-    const loadSavedLogo = () => {
+    const loadSavedData = () => {
       if (typeof window !== 'undefined' && user?.uid) {
         const savedLogo = localStorage.getItem(`company_logo_${user.uid}`);
+        const savedName = localStorage.getItem(`company_name_${user.uid}`);
+        const savedCnpj = localStorage.getItem(`company_cnpj_${user.uid}`);
+        
         if (savedLogo) {
           console.log('Carregando logotipo do localStorage:', savedLogo);
           setCompanyLogo(savedLogo);
         }
+        if (savedName) {
+          setCompanyName(savedName);
+        }
+        if (savedCnpj) {
+          setCompanyCnpj(savedCnpj);
+        }
       }
     };
 
-    loadSavedLogo();
+    loadSavedData();
   }, [user]);
 
   // Função para atualizar o logotipo
@@ -66,11 +80,18 @@ export function CompanyProvider({ children }: CompanyProviderProps) {
       const result = await StorageService.uploadCompanyLogo(file, user.uid);
       
       // Atualizar estado e cache
+      console.log('🔄 Atualizando logo no contexto:', result.url);
+      
+      // Forçar atualização do estado
       setCompanyLogo(result.url);
+      
+      // Salvar no localStorage
       localStorage.setItem(`company_logo_${user.uid}`, result.url);
       localStorage.setItem(`company_logo_path_${user.uid}`, result.path);
       
-      console.log('Upload concluído e salvo:', result);
+      console.log('✅ Upload concluído e salvo:', result);
+      console.log('📦 Estado do logo após upload:', result.url);
+      console.log('💾 LocalStorage atualizado para user:', user.uid);
     } catch (error: any) {
       console.error('Erro no upload:', error);
       setLogoError(error.message);
@@ -78,6 +99,19 @@ export function CompanyProvider({ children }: CompanyProviderProps) {
     } finally {
       setIsLoadingLogo(false);
     }
+  };
+
+  // Função para atualizar informações da empresa
+  const updateCompanyInfo = (name: string, cnpj: string) => {
+    if (!user) return;
+
+    setCompanyName(name);
+    setCompanyCnpj(cnpj);
+    
+    // Salvar no localStorage
+    localStorage.setItem(`company_name_${user.uid}`, name);
+    localStorage.setItem(`company_cnpj_${user.uid}`, cnpj);
+    console.log('Informações da empresa salvas:', { name, cnpj });
   };
 
   // Função para limpar o logotipo
@@ -106,10 +140,13 @@ export function CompanyProvider({ children }: CompanyProviderProps) {
   return (
     <CompanyContext.Provider value={{
       companyLogo,
+      companyName,
+      companyCnpj,
       isLoadingLogo,
       logoError,
       updateCompanyLogo,
       uploadCompanyLogo,
+      updateCompanyInfo,
       clearLogo
     }}>
       {children}

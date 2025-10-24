@@ -3,15 +3,12 @@
 import { useRef, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
-import { useCompany } from "@/contexts/CompanyContext";
 import Image from "next/image";
 
 export default function ProfilePage() {
   const { t } = useLanguage();
   const { user } = useAuth();
-  const { companyLogo, uploadCompanyLogo, logoError, isLoadingLogo } = useCompany();
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [companyLogoPreview, setCompanyLogoPreview] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: user?.displayName || "",
     birthDate: "",
@@ -26,7 +23,6 @@ export default function ProfilePage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [successMessage, setSuccessMessage] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const logoInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -83,45 +79,8 @@ export default function ProfilePage() {
     }, 1200);
   };
 
-  const handleCompanyLogoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file || !user) return;
-
-    try {
-      setErrors({ ...errors, companyLogo: "" });
-      
-      // Preview local imediato
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setCompanyLogoPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-
-      console.log("Iniciando upload para Firebase Storage...", { 
-        fileName: file.name, 
-        fileSize: file.size,
-        fileType: file.type 
-      });
-      
-      // Upload para Firebase Storage via contexto
-      await uploadCompanyLogo(file);
-      
-      setSuccessMessage("Logotipo da empresa atualizado com sucesso!");
-      setTimeout(() => setSuccessMessage(""), 3000);
-      
-    } catch (error: any) {
-      console.error("Erro no upload do logotipo:", error);
-      setErrors({ ...errors, companyLogo: error.message });
-      setCompanyLogoPreview(null);
-    }
-  };
-
   const handlePhotoClick = () => {
     fileInputRef.current?.click();
-  };
-
-  const handleLogoClick = () => {
-    logoInputRef.current?.click();
   };
 
   return (
@@ -175,59 +134,6 @@ export default function ProfilePage() {
             {errors.avatar && (
               <div className="text-xs text-red-500 mt-1">{errors.avatar}</div>
             )}
-          </div>
-        </div>
-
-        {/* Logotipo da Empresa */}
-        <div className="border-t border-gray-200 dark:border-gray-700 pt-8">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Logotipo da Empresa</h3>
-          <div className="flex items-center gap-6">
-            <div className="relative">
-              <div
-                className="w-32 h-20 rounded-lg bg-gray-200 dark:bg-gray-800 flex items-center justify-center overflow-hidden cursor-pointer border-2 border-dashed border-gray-300 dark:border-gray-600 hover:border-gold-500 dark:hover:border-gold-500 transition"
-                onClick={handleLogoClick}
-                title="Clique para alterar o logotipo da empresa"
-              >
-                {companyLogoPreview || companyLogo ? (
-                  <Image
-                    src={companyLogoPreview || companyLogo || ""}
-                    alt="Logotipo da empresa"
-                    fill
-                    className="object-contain w-full h-full p-2"
-                  />
-                ) : (
-                  <div className="text-center text-gray-400 text-xs">
-                    <svg className="w-8 h-8 mx-auto mb-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                    <div>Logotipo</div>
-                  </div>
-                )}
-              </div>
-              <input
-                type="file"
-                accept="image/png,image/jpg,image/jpeg,image/svg+xml"
-                className="hidden"
-                ref={logoInputRef}
-                onChange={handleCompanyLogoChange}
-              />
-            </div>
-            <div className="flex-1">
-              <div className="font-semibold text-gray-900 dark:text-gray-100 text-sm mb-1">Logotipo da Empresa</div>
-              <div className="text-gray-600 dark:text-gray-400 text-xs mb-2">
-                Formatos aceitos: PNG, JPG, SVG (máx. 2MB)
-              </div>
-              <div className="text-xs text-gray-400">Clique na área para fazer upload</div>
-              {errors.companyLogo && (
-                <div className="text-xs text-red-500 mt-1">{errors.companyLogo}</div>
-              )}
-              {logoError && (
-                <div className="text-xs text-red-500 mt-1">{logoError}</div>
-              )}
-              {isLoadingLogo && (
-                <div className="text-xs text-blue-500 mt-1">Carregando...</div>
-              )}
-            </div>
           </div>
         </div>
 
