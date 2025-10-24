@@ -2,10 +2,56 @@
 
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useCallback, useMemo, useRef, useState, useEffect } from "react";
+import { StorageService } from "@/services/storageService";
+import { updateFavicon } from "@/components/FaviconManager";
 
 export default function SettingsPage() {
   const { theme, setTheme } = useTheme();
   const { t, language, setLanguage } = useLanguage();
+  const [faviconUrl, setFaviconUrl] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Carregar favicon do localStorage após hidratação
+  useEffect(() => {
+    const savedFavicon = localStorage.getItem('app_favicon_url');
+    if (savedFavicon) {
+      setFaviconUrl(savedFavicon);
+    }
+  }, []);
+
+  const handleSelectFile = useCallback(() => {
+    fileInputRef.current?.click();
+  }, []);
+
+  const handleFileChange = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    try {
+      setIsUploading(true);
+      setUploadError(null);
+      
+      const result = await StorageService.uploadFavicon(file);
+      setFaviconUrl(result.url);
+      updateFavicon(result.url);
+      
+      console.log('Favicon uploaded successfully:', result.url);
+    } catch (err: any) {
+      console.error('Error uploading favicon:', err);
+      setUploadError(err?.message || 'Falha ao enviar favicon');
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  }, []);
+
+  const handleRemoveFavicon = useCallback(() => {
+    setFaviconUrl(null);
+    updateFavicon(null);
+  }, []);
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -19,6 +65,59 @@ export default function SettingsPage() {
       </div>
 
       <div className="grid gap-6">
+        {/* Favicon Settings */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+            Favicon
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
+            Envie um arquivo PNG ou SVG para personalizar o ícone do site.
+          </p>
+
+          {uploadError && (
+            <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
+              <p className="text-red-600 dark:text-red-400 text-sm">{uploadError}</p>
+            </div>
+          )}
+
+          <div className="flex items-center gap-6">
+            <div className="w-12 h-12 rounded bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+              {faviconUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={faviconUrl} alt="favicon" className="w-full h-full object-contain" />
+              ) : (
+                <span className="text-xs text-gray-500">Sem ícone</span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleSelectFile}
+                disabled={isUploading}
+                className="px-4 py-2 rounded-md bg-gold-500 text-white hover:bg-gold-600 disabled:opacity-60"
+              >
+                {isUploading ? 'Enviando...' : 'Enviar favicon'}
+              </button>
+              {faviconUrl && (
+                <button
+                  onClick={handleRemoveFavicon}
+                  disabled={isUploading}
+                  className="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-60"
+                >
+                  Remover
+                </button>
+              )}
+            </div>
+
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/png,image/svg+xml"
+              className="hidden"
+              onChange={handleFileChange}
+            />
+          </div>
+        </div>
         {/* Theme Settings */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">

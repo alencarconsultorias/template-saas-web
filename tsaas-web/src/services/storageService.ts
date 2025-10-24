@@ -40,6 +40,41 @@ export class StorageService {
   }
 
   /**
+   * Upload de favicon do site
+   */
+  static async uploadFavicon(file: File): Promise<UploadResult> {
+    try {
+      // Favicons aceitam ICO, PNG e SVG. Permitimos PNG e SVG aqui por padronização moderna
+      const allowedTypes = ['image/png', 'image/svg+xml'];
+      if (!allowedTypes.includes(file.type)) {
+        throw new Error('Formato não suportado. Use PNG ou SVG.');
+      }
+
+      // Tamanho razoável para favicon
+      const maxSize = 512 * 1024; // 512KB
+      if (file.size > maxSize) {
+        throw new Error('Arquivo muito grande. Máximo 512KB.');
+      }
+
+      const timestamp = Date.now();
+      const extension = file.name.split('.').pop() || (file.type === 'image/png' ? 'png' : 'svg');
+      const fileName = `favicon_${timestamp}.${extension}`;
+      const faviconRef = ref(storage, `branding/favicon/${fileName}`);
+
+      const snapshot = await uploadBytes(faviconRef, file);
+      const downloadURL = await getDownloadURL(snapshot.ref);
+
+      return {
+        url: downloadURL,
+        path: snapshot.ref.fullPath,
+      };
+    } catch (error) {
+      console.error('Erro no upload do favicon:', error);
+      throw new Error('Falha no upload do favicon. Tente novamente.');
+    }
+  }
+
+  /**
    * Atualizar avatar no perfil do Firebase Auth
    */
   static async updateUserAvatar(avatarUrl: string): Promise<void> {
