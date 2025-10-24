@@ -11,6 +11,83 @@ export interface UploadResult {
 
 export class StorageService {
   /**
+   * Upload de logotipo da empresa
+   */
+  static async uploadCompanyLogo(file: File, userId: string): Promise<UploadResult> {
+    try {
+      // Validação específica para logotipo
+      this.validateLogoFile(file);
+      
+      // Criar referência única para o logotipo da empresa
+      const timestamp = Date.now();
+      const fileExtension = file.name.split('.').pop()?.toLowerCase() || 'png';
+      const fileName = `company_logo_${timestamp}.${fileExtension}`;
+      const logoRef = ref(storage, `company_logos/${userId}/${fileName}`);
+      
+      console.log('Iniciando upload para Firebase Storage...', {
+        fileName,
+        fileSize: file.size,
+        fileType: file.type,
+        path: `company_logos/${userId}/${fileName}`
+      });
+      
+      // Configurar metadata do arquivo
+      const metadata = {
+        contentType: file.type,
+        customMetadata: {
+          uploadedBy: userId,
+          uploadedAt: new Date().toISOString(),
+          originalName: file.name
+        }
+      };
+      
+      // Upload do arquivo com metadata
+      const snapshot = await uploadBytes(logoRef, file, metadata);
+      console.log('Upload concluído:', snapshot);
+      
+      // Obter URL de download
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      console.log('URL de download obtida:', downloadURL);
+      
+      return {
+        url: downloadURL,
+        path: snapshot.ref.fullPath
+      };
+    } catch (error: any) {
+      console.error('Erro detalhado no upload do logotipo:', {
+        error,
+        message: error.message,
+        code: error.code,
+        stack: error.stack
+      });
+      
+      // Mensagens de erro mais específicas
+      if (error.code === 'storage/unauthorized') {
+        throw new Error('Sem permissão para fazer upload. Verifique as regras do Firebase.');
+      } else if (error.code === 'storage/canceled') {
+        throw new Error('Upload cancelado.');
+      } else if (error.code === 'storage/unknown') {
+        throw new Error('Erro desconhecido no Firebase Storage.');
+      } else {
+        throw new Error(`Falha no upload: ${error.message}`);
+      }
+    }
+  }
+
+  /**
+   * Deletar logotipo da empresa anterior
+   */
+  static async deleteCompanyLogo(logoPath: string): Promise<void> {
+    try {
+      const logoRef = ref(storage, logoPath);
+      await deleteObject(logoRef);
+    } catch (error) {
+      console.error('Erro ao deletar logotipo anterior:', error);
+      // Não lança erro pois não é crítico
+    }
+  }
+
+  /**
    * Upload de avatar do usuário
    */
   static async uploadAvatar(file: File, userId: string): Promise<UploadResult> {
@@ -105,6 +182,23 @@ export class StorageService {
     } catch (error) {
       console.error('Erro ao deletar avatar anterior:', error);
       // Não lança erro pois não é crítico
+    }
+  }
+
+  /**
+   * Validação do arquivo de logotipo da empresa
+   */
+  private static validateLogoFile(file: File): void {
+    // Verificar tipo de arquivo (inclui SVG para logotipos)
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/svg+xml'];
+    if (!allowedTypes.includes(file.type)) {
+      throw new Error('Formato de arquivo não suportado. Use JPEG, PNG ou SVG.');
+    }
+    
+    // Verificar tamanho (máximo 2MB para logotipos)
+    const maxSize = 2 * 1024 * 1024; // 2MB
+    if (file.size > maxSize) {
+      throw new Error('Arquivo muito grande. O tamanho máximo é 2MB.');
     }
   }
 

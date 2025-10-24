@@ -54,36 +54,13 @@ export default function Sidebar() {
           width: isCollapsed ? 64 : 256
         }}
         transition={{ duration: 0.3 }}
-        className={`fixed top-0 left-0 z-40 bg-white dark:bg-gray-900 transform lg:translate-x-0 lg:static lg:inset-0 ${
+        className={`fixed top-16 left-0 z-30 bg-white dark:bg-gray-900 transform lg:translate-x-0 lg:static lg:top-0 ${
           isCollapsed ? 'w-16' : 'w-64'
-        } h-[calc(100vh-12rem)] lg:h-[calc(100vh-6rem)] mt-0 mb-0 lg:mt-2 lg:mb-2 lg:rounded-lg shadow-lg border border-gray-200 dark:border-gray-700`}
+        } h-[calc(100vh-4rem)] lg:h-full shadow-lg border-r border-gray-200 dark:border-gray-700`}
       >
         <div className="flex flex-col h-full min-h-0">
-          {/* Header - Altura fixa */}
-          <div className="flex items-center justify-center h-12 px-4 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 flex-shrink-0 lg:rounded-t-lg">
-            {!isCollapsed && (
-              <motion.h1 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="text-xl font-bold text-gray-900 dark:text-gold-500"
-              >
-                SaaS Platform
-              </motion.h1>
-            )}
-            {isCollapsed && (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="w-7 h-7 rounded-full bg-gold-500 flex items-center justify-center"
-              >
-                <span className="text-white font-bold text-xs">S</span>
-              </motion.div>
-            )}
-          </div>
-
           {/* Navigation - Área flexível com scroll */}
-          <nav className="flex-1 px-3 py-2 overflow-y-auto min-h-0">
+          <nav className="flex-1 px-3 py-4 overflow-y-auto min-h-0">
             <div className="space-y-1">
               {navigation.map((item) => {
                 const isActive = pathname === item.href;
@@ -128,7 +105,7 @@ export default function Sidebar() {
           </nav>
 
           {/* User profile section - Sempre visível */}
-          <div className="px-3 py-2 border-t border-gray-200 dark:border-gray-700 flex-shrink-0 lg:rounded-b-lg bg-white dark:bg-gray-900">
+          <div className="px-3 py-4 border-t border-gray-200 dark:border-gray-700 flex-shrink-0 bg-white dark:bg-gray-900">
             {!isCollapsed ? (
               <motion.div 
                 initial={{ opacity: 0 }}

@@ -4,12 +4,12 @@ import { getStorage, connectStorageEmulator, FirebaseStorage } from "firebase/st
 
 // Read envs from Next.js runtime
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY as string,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN as string,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID as string,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET as string,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID as string,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID as string,
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY_PROD as string,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN_PROD as string,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID_PROD as string,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET_PROD as string,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID_PROD as string,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID_PROD as string,
 };
 
 function assertEnv(variable: string | undefined, name: string): asserts variable is string {
@@ -18,12 +18,12 @@ function assertEnv(variable: string | undefined, name: string): asserts variable
   }
 }
 
-assertEnv(firebaseConfig.apiKey, "NEXT_PUBLIC_FIREBASE_API_KEY");
-assertEnv(firebaseConfig.authDomain, "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN");
-assertEnv(firebaseConfig.projectId, "NEXT_PUBLIC_FIREBASE_PROJECT_ID");
-assertEnv(firebaseConfig.storageBucket, "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET");
-assertEnv(firebaseConfig.messagingSenderId, "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID");
-assertEnv(firebaseConfig.appId, "NEXT_PUBLIC_FIREBASE_APP_ID");
+assertEnv(firebaseConfig.apiKey, "NEXT_PUBLIC_FIREBASE_API_KEY_PROD");
+assertEnv(firebaseConfig.authDomain, "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN_PROD");
+assertEnv(firebaseConfig.projectId, "NEXT_PUBLIC_FIREBASE_PROJECT_ID_PROD");
+assertEnv(firebaseConfig.storageBucket, "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET_PROD");
+assertEnv(firebaseConfig.messagingSenderId, "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID_PROD");
+assertEnv(firebaseConfig.appId, "NEXT_PUBLIC_FIREBASE_APP_ID_PROD");
 
 let app: FirebaseApp;
 let auth: Auth;

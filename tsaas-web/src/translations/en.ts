@@ -1,5 +1,13 @@
 export const en = {
   // ... existing translations ...
+  common: {
+    dashboard: "Dashboard",
+    projects: "Projects",
+    analytics: "Analytics",
+    reports: "Reports",
+    team: "Team",
+    companySettings: "My Company",
+  },
   reports: {
     title: "Reports",
     filters: {
