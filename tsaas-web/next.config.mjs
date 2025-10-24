@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // output: 'export', // Configuração para Amplify
-  output: 'standalone', // Configuração para Docker
-  images: { unoptimized: true },
+  // Configuração otimizada para Vercel
+  images: {
+    domains: ['localhost'],
+    unoptimized: false, // Vercel otimiza imagens automaticamente
+  },
   webpack(config) {
     // Importa a configuração padrão de regra de módulo de arquivos
     const fileLoaderRule = config.module.rules.find((rule) =>
